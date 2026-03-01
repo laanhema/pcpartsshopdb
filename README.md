@@ -1,0 +1,8 @@
+- tietokone-osien suositus db siis verkkokauppa tietokoneosien ostamiseen mutta spesifimmin ostoksien mukaan suositusten tekemiseen esim amazon tyylinen (tämän tuotteen tilanneet henkilöt ovat ostaneet myös näitä: [näyttää tuotteita]) tai jimms tyylinen (KallisDB)
+  - eli käyttäjät
+    - mitä tuotteita kukin on ostanut
+    - sukupuoli mby nainen mies muu, vaikuttaa ostotottumuksiin
+    - hintahaarukka
+    - merkki nvidia amd intel etc.
+    - alennushinta y/n
+    - katsonut näitä tuotteita mby
