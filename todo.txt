@@ -1,4 +1,0 @@
-- tee docker compose yamli
-- mietin tietorakenne
-- siisti README.md
-- lisää gitignoreen kaikki mitä ei kantsi laittaa repoon
