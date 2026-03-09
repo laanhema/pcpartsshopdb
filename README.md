@@ -31,3 +31,23 @@ Asiakas, tilaus, tuote, arvostelu
 -> PLACED
 -> CONTAINS
 -> REVIEWED
+
+Rule of Thumb: If it’s an "Action" or a "Relationship," it should be a Relationship (-[]->). If it’s a "Noun" or an "Entity," it’s a Node (()).
+
+<hr>
+
+Neo4j Project
+
+NoSQL-oppimistehtävä: Pcpartsshop-tietokanta (Neo4j).
+
+Ajatuksena tässä oli tehdä kalastus-aiheiselle kännykkäsovellukselle tietokanta käyttäen MongoDB:tä.
+Asennus ja testaus
+
+    Kloonaa repositorio itsellesi git clone https://github.com/laanhema/kalastusdb.git
+    Siirry hakemistoon cd kalastusdb/
+    Käynnistä tietokanta docker compose up -d
+    Lisää käyttäjädata ajamalla docker exec -i kalastus_db mongoimport -u root -p password --authenticationDatabase=admin --drop -d kalastus_db -c kayttajat --jsonArray < kayttajat.json
+    Lisää saalisdata ajamalla docker exec -i kalastus_db mongoimport -u root -p password --authenticationDatabase=admin --drop -d kalastus_db -c saaliit --jsonArray < saaliit.json
+    Lisää indeksit ajamalla docker cp indeksit.js kalastus_db:/tmp/ && docker exec kalastus_db mongosh -u root -p password --authenticationDatabase=admin kalastus_db --file /tmp/indeksit.js
+    Käynnistä Mongodb Compass ja päivitä näkymä tarvittaessa
+    Testaa tietokantaa queries.js tiedostosta löytyvillä kyselyillä

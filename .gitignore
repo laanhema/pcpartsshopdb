@@ -1,0 +1,6 @@
+# Ignore Neo4j data
+data/
+logs/
+import/
+# Ignore temporary todo.txt
+todo.txt
