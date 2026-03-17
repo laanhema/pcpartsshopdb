@@ -30,10 +30,68 @@ eli mitä haluaisin hakea tietokannasta:
 
 Asiakas, tilaus, tuote, arvostelu
 
-(a:Asiakas) -[:PLACED]-> (o:Order)
+(c:Customer) -[:PLACED]-> (o:Order)
 (o:Order) -[:CONTAINS]-> (p:Product)
-(a:Asiakas) -[:REVIEWED]-> (p:Product)
-(a:Asiakas) -[:WROTE]-> (r:Review)
+(c:Customer) -[:REVIEWED]-> (p:Product)
+(c:Customer) -[:WROTE]-> (r:Review)
+
+<hr>
+
+mitä attribuutteja pitäisi olla?
+
+CUSTOMER
+
+- id (auto-generated)
+- email
+- password_hash
+- name
+- address
+- postnumber
+- date_of_birth
+- phone_number
+- marketing_preference
+- account_status
+- account_created_at
+- preferred_language
+
+ORDER
+
+- id (auto-generated)
+- customer_id
+- included_products[]
+- order_status
+- order_date
+- estimated_arrival_date
+- arrival_date
+- total_price
+- post_tracking_number
+
+REVIEW
+
+- id (auto-generated)
+- customer_id
+- product_id
+- rating
+- title
+- body
+- timestamp
+
+PRODUCT
+
+- id (auto-generated)
+- product_image_url
+- product_name
+- product_description
+- product_type
+- price
+- tags
+- manufacturer
+- weight_kg
+- dimensions_cm
+- product_status
+- specs
+
+<hr>
 
 Rule of Thumb: If it’s an "Action" or a "Relationship," it should be a Relationship (-[]->). If it’s a "Noun" or an "Entity," it’s a Node (()).
 
