@@ -26,11 +26,14 @@ eli mitä haluaisin hakea tietokannasta:
 "Haluan nähdä ketkä ovat tilanneet tämän tuotteen (sisältyy heidän tilaukseen tilauksiin)"
 "Haluan nähdä ketkä ovat arvostelleet tämän komponentin"
 
+<hr>
+
 Asiakas, tilaus, tuote, arvostelu
 
--> PLACED
--> CONTAINS
--> REVIEWED
+(a:Asiakas) -[:PLACED]-> (o:Order)
+(o:Order) -[:CONTAINS]-> (p:Product)
+(a:Asiakas) -[:REVIEWED]-> (p:Product)
+(a:Asiakas) -[:WROTE]-> (r:Review)
 
 Rule of Thumb: If it’s an "Action" or a "Relationship," it should be a Relationship (-[]->). If it’s a "Noun" or an "Entity," it’s a Node (()).
 
