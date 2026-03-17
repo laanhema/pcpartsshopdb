@@ -28,7 +28,9 @@ eli mitä haluaisin hakea tietokannasta:
 
 <hr>
 
-Asiakas, tilaus, tuote, arvostelu
+### Asiakas, tilaus, tuote, arvostelu
+
+<br>
 
 (c:Customer) -[:PLACED]-> (o:Order)
 (o:Order) -[:CONTAINS]-> (p:Product)
@@ -37,7 +39,7 @@ Asiakas, tilaus, tuote, arvostelu
 
 <hr>
 
-mitä attribuutteja pitäisi olla?
+### Mitä attribuutteja pitäisi olla?
 
 CUSTOMER
 
@@ -54,6 +56,8 @@ CUSTOMER
 - account_created_at
 - preferred_language
 
+<br>
+
 ORDER
 
 - id (auto-generated)
@@ -65,6 +69,8 @@ ORDER
 - arrival_date
 - total_price
 - post_tracking_number
+
+<br>
 
 REVIEW
 
@@ -102,14 +108,17 @@ Neo4j Project
 
 NoSQL-oppimistehtävä: Pcpartsshop-tietokanta (Neo4j).
 
-Ajatuksena tässä oli tehdä kalastus-aiheiselle kännykkäsovellukselle tietokanta käyttäen MongoDB:tä.
-Asennus ja testaus
+Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta käyttäen Neo4j:tä. Pääfokuksena tietokannassa on suosittelut. Asiakkaille suositellaan muita tuotteita joita on ostettu tämän tuotteen kanssa.
 
-    Kloonaa repositorio itsellesi git clone https://github.com/laanhema/kalastusdb.git
-    Siirry hakemistoon cd kalastusdb/
+<hr>
+
+### Asennus ja testaus
+
+    Kloonaa repositorio itsellesi git clone https://github.com/laanhema/pcpartsshopdb.git
+    Siirry hakemistoon cd pcpartsshopdb/
     Käynnistä tietokanta docker compose up -d
     Lisää käyttäjädata ajamalla docker exec -i kalastus_db mongoimport -u root -p password --authenticationDatabase=admin --drop -d kalastus_db -c kayttajat --jsonArray < kayttajat.json
     Lisää saalisdata ajamalla docker exec -i kalastus_db mongoimport -u root -p password --authenticationDatabase=admin --drop -d kalastus_db -c saaliit --jsonArray < saaliit.json
     Lisää indeksit ajamalla docker cp indeksit.js kalastus_db:/tmp/ && docker exec kalastus_db mongosh -u root -p password --authenticationDatabase=admin kalastus_db --file /tmp/indeksit.js
-    Käynnistä Mongodb Compass ja päivitä näkymä tarvittaessa
-    Testaa tietokantaa queries.js tiedostosta löytyvillä kyselyillä
+    Käynnistä selain ja avaa Neo4j-browser
+    Testaa tietokantaa queries.cypher tiedostosta löytyvillä kyselyillä
