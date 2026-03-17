@@ -90,6 +90,7 @@ PRODUCT
 - dimensions_cm
 - product_status
 - specs
+- compatibility_info
 
 <hr>
 
