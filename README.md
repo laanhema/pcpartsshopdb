@@ -122,3 +122,10 @@ Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta 
     Lisää indeksit ajamalla docker cp indeksit.js kalastus_db:/tmp/ && docker exec kalastus_db mongosh -u root -p password --authenticationDatabase=admin kalastus_db --file /tmp/indeksit.js
     Käynnistä selain ja avaa Neo4j-browser
     Testaa tietokantaa queries.cypher tiedostosta löytyvillä kyselyillä
+
+
+    Toimeksiantaja mainitsi että lippujen viime hetkellä myyminen on ongelmallista järjestäjän näkökulmasta​
+
+    Early bird –lippu motivoisi kävijöitä ostamaan liput hyvissä ajoin ja palkkioksi he saisivat jotain VIP tyylisiä bonuksia tapahtumaan​
+
+    Käytännössä vaatisi uuden lipputyypin luomisen ja sen implementoimisen lanitapahtuman nettisivulle
