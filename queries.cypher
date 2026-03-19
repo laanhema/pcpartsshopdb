@@ -1,7 +1,7 @@
-// Tyhjennetään tietokanta
+// tyhjennetään tietokanta
 MATCH (n) DETACH DELETE n;
-
-// Create 10 sample customers according to the README Customer model.
+// ---------------------------------------------------------------------------------
+// create 10 example customers
 CREATE (c1:Customer {
     id: 1,
 		email: "aino.virtanen@example.com",
@@ -152,12 +152,12 @@ CREATE (c10:Customer {
 		preferred_language: "fi"
 	}) 
 	;
-//----------------------------------------------------------
-// Create 10 sample orders with realistic data
+// ---------------------------------------------------------------------------------
+// Create 10 example orders
 CREATE (o1:Order {
     id: 1,
 		customer_id: 1,
-		included_products: [101, 205],
+		included_products: [1, 5],
 		order_status: "delivered",
 		order_date: datetime("2024-12-15T10:30:00Z"),
 		estimated_arrival_date: datetime("2024-12-22T23:59:59Z"),
@@ -168,7 +168,7 @@ CREATE (o1:Order {
 CREATE (o2:Order {
     id: 2,
 		customer_id: 2,
-		included_products: [103, 204, 310],
+		included_products: [6, 3, 4],
 		order_status: "being processed",
 		order_date: datetime("2025-03-10T08:15:00Z"),
 		estimated_arrival_date: datetime("2025-03-17T23:59:59Z"),
@@ -179,7 +179,7 @@ CREATE (o2:Order {
 CREATE (o3:Order {
     id: 3,
 		customer_id: 3,
-		included_products: [205, 301],
+		included_products: [5, 4],
 		order_status: "shipped",
 		order_date: datetime("2025-03-12T16:45:00Z"),
 		estimated_arrival_date: datetime("2025-03-19T23:59:59Z"),
@@ -190,7 +190,7 @@ CREATE (o3:Order {
 CREATE (o4:Order {
     id: 4,
 		customer_id: 5,
-		included_products: [102, 206, 311],
+		included_products: [2, 3, 9],
 		order_status: "delivered",
 		order_date: datetime("2025-02-20T11:00:00Z"),
 		estimated_arrival_date: datetime("2025-02-27T23:59:59Z"),
@@ -201,7 +201,7 @@ CREATE (o4:Order {
 CREATE (o5:Order {
     id: 5,
 		customer_id: 7,
-		included_products: [104, 305],
+		included_products: [1, 4],
 		order_status: "cancelled",
 		order_date: datetime("2025-01-30T14:20:00Z"),
 		estimated_arrival_date: datetime("2025-02-06T23:59:59Z"),
@@ -212,7 +212,7 @@ CREATE (o5:Order {
 CREATE (o6:Order {
     id: 6,
 		customer_id: 4,
-		included_products: [201, 308],
+		included_products: [3, 8],
 		order_status: "delivered",
 		order_date: datetime("2025-01-05T09:45:00Z"),
 		estimated_arrival_date: datetime("2025-01-12T23:59:59Z"),
@@ -223,7 +223,7 @@ CREATE (o6:Order {
 CREATE (o7:Order {
     id: 7,
 		customer_id: 6,
-		included_products: [103, 207, 312],
+		included_products: [6, 7, 10],
 		order_status: "shipped",
 		order_date: datetime("2025-03-14T13:20:00Z"),
 		estimated_arrival_date: datetime("2025-03-21T23:59:59Z"),
@@ -234,7 +234,7 @@ CREATE (o7:Order {
 CREATE (o8:Order {
     id: 8,
 		customer_id: 8,
-		included_products: [106, 302],
+		included_products: [6, 4],
 		order_status: "being processed",
 		order_date: datetime("2025-03-16T10:00:00Z"),
 		estimated_arrival_date: datetime("2025-03-23T23:59:59Z"),
@@ -245,7 +245,7 @@ CREATE (o8:Order {
 CREATE (o9:Order {
     id: 9,
 		customer_id: 9,
-		included_products: [202, 306, 309],
+		included_products: [7, 4, 9],
 		order_status: "delivered",
 		order_date: datetime("2025-02-10T14:30:00Z"),
 		estimated_arrival_date: datetime("2025-02-17T23:59:59Z"),
@@ -256,7 +256,7 @@ CREATE (o9:Order {
 CREATE (o10:Order {
     id: 10,
 		customer_id: 10,
-		included_products: [105, 304, 307],
+		included_products: [2, 4, 8],
 		order_status: "pending",
 		order_date: datetime("2025-03-17T15:55:00Z"),
 		estimated_arrival_date: datetime("2025-03-24T23:59:59Z"),
@@ -264,29 +264,266 @@ CREATE (o10:Order {
 		total_price_eur: 1549.50,
 		post_tracking_number: 321654987
 	});
-// ---------------------------------------------------------
+// ---------------------------------------------------------------------------------
+// create 10 example products
+CREATE (p1:Product {
+  id: 1,
+  name: "Intel Core i5-12600K",
+  image: "https://cdn.myapp.com/uploads/products/product_101.jpg",
+  description: "12th Gen Intel Core i5-12600K desktop processor. Featuring PCIe 5.0 & 4.0 support, DDR5 and DDR4 support, unlocked 12th Gen Intel Core desktop processors are optimized for enthusiast gamers and serious creators and help deliver high performance overclocking for an added boost.",
+  product_type: "CPU",
+  price_eur: 289.99,
+  tags: ["lga1700", "intel", "cpu", "processor"],
+  manufacturer: "Intel",
+  weight_kg: 0.1,
+  dimensions_wh_cm: [4.5, 3.75],
+  product_status: "available",
+  specs: "{'cores': 10, 'threads': 16, 'base_clock': '3.7GHz', 'boost_clock': '4.9GHz', 'socket': 'LGA1700'}",
+  compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
+});
+CREATE (p2:Product {
+  id: 2,
+  name: "AMD Ryzen 5 5600X",
+  image: "https://cdn.myapp.com/uploads/products/product_102.jpg",
+  description: "Get the competitive edge in gaming with the world's best desktop processor. AMD Ryzen 5 5600X has 6 cores and 12 threads, and is compatible with AM4 socket motherboards.",
+  product_type: "CPU",
+  price_eur: 159.90,
+  tags: ["am4", "amd", "cpu", "processor", "ryzen"],
+  manufacturer: "AMD",
+  weight_kg: 0.08,
+  dimensions_wh_cm: [4.0, 4.0],
+  product_status: "available",
+  specs: "{'cores': 6, 'threads': 12, 'base_clock': '3.7GHz', 'boost_clock': '4.6GHz', 'socket': 'AM4'}",
+  compatibility_info: "Requires AM4 socket motherboard. Check motherboard manufacturer's website for CPU support list."
+});
+
+CREATE (p3:Product {
+  id: 3,
+  name: "NVIDIA GeForce RTX 3060",
+  image: "https://cdn.myapp.com/uploads/products/product_201.jpg",
+  description: "The GeForce RTX 3060 lets you take on the latest games using the power of Ampere—NVIDIA's 2nd generation RTX architecture. Get incredible performance with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory.",
+  product_type: "GPU",
+  price_eur: 349.00,
+  tags: ["nvidia", "gpu", "graphics card", "rtx 3060"],
+  manufacturer: "NVIDIA",
+  weight_kg: 1.2,
+  dimensions_wh_cm: [24.2, 11.2],
+  product_status: "available",
+  specs: "{'memory': '12GB GDDR6', 'boost_clock': '1777MHz', 'cuda_cores': 3584}",
+  compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 550W."
+});
+
+CREATE (p4:Product {
+  id: 4,
+  name: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz",
+  image: "https://cdn.myapp.com/uploads/products/product_301.jpg",
+  description: "Vengeance LPX memory is designed for high-performance overclocking. The heatspreader is made of pure aluminum for faster heat dissipation, and the eight-layer PCB helps manage heat and provides superior overclocking headroom.",
+  product_type: "RAM",
+  price_eur: 49.99,
+  tags: ["ram", "memory", "ddr4", "corsair"],
+  manufacturer: "Corsair",
+  weight_kg: 0.1,
+  dimensions_wh_cm: [13.5, 3.4],
+  product_status: "available",
+  specs: "{'capacity': '16GB', 'type': 'DDR4', 'speed': '3200MHz', 'modules': 2}",
+  compatibility_info: "Compatible with DDR4 motherboards. Check motherboard QVL for full compatibility."
+});
+
+CREATE (p5:Product {
+  id: 5,
+  name: "ASUS ROG Strix B550-F Gaming",
+  image: "https://cdn.myapp.com/uploads/products/product_205.jpg",
+  description: "ROG Strix B550 Gaming series motherboards offer a feature-set usually found in the higher-end ROG Strix X570 Gaming series, including the latest PCIe 4.0. With robust power delivery and effective cooling, ROG Strix B550 Gaming is well-equipped to handle 3rd Gen AMD Ryzen CPUs.",
+  product_type: "Motherboard",
+  price_eur: 189.90,
+  tags: ["motherboard", "asus", "am4", "b550"],
+  manufacturer: "ASUS",
+  weight_kg: 1.7,
+  dimensions_wh_cm: [30.5, 24.4],
+  product_status: "available",
+  specs: "{'socket': 'AM4', 'chipset': 'B550', 'form_factor': 'ATX'}",
+  compatibility_info: "Supports 3rd Gen AMD Ryzen processors. BIOS update may be required for newer CPUs."
+});
+
+CREATE (p6:Product {
+  id: 6,
+  name: "Intel Core i9-12900K",
+  image: "https://cdn.myapp.com/uploads/products/product_103.jpg",
+  description: "12th Gen Intel Core i9-12900K desktop processor. Featuring revolutionary hybrid design with Performance-cores and Efficient-cores for breakthrough performance and responsiveness.",
+  product_type: "CPU",
+  price_eur: 599.00,
+  tags: ["lga1700", "intel", "cpu", "processor", "i9"],
+  manufacturer: "Intel",
+  weight_kg: 0.1,
+  dimensions_wh_cm: [4.5, 3.75],
+  product_status: "available",
+  specs: "{'cores': 16, 'threads': 24, 'base_clock': '3.2GHz', 'boost_clock': '5.2GHz', 'socket': 'LGA1700'}",
+  compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
+});
+
+CREATE (p7:Product {
+  id: 7,
+  name: "AMD Radeon RX 6700 XT",
+  image: "https://cdn.myapp.com/uploads/products/product_202.jpg",
+  description: "The AMD Radeon RX 6700 XT graphics card, powered by AMD RDNA 2 architecture, featuring 40 powerful enhanced Compute Units, the all new AMD Infinity Cache and 12GB of dedicated GDDR6 memory, is engineered to deliver ultra-high frame rates and powerhouse 1440p resolution gaming.",
+  product_type: "GPU",
+  price_eur: 429.00,
+  tags: ["amd", "gpu", "graphics card", "rx 6700 xt", "radeon"],
+  manufacturer: "AMD",
+  weight_kg: 1.5,
+  dimensions_wh_cm: [26.7, 11.0],
+  product_status: "out_of_stock",
+  specs: "{'memory': '12GB GDDR6', 'boost_clock': '2581MHz', 'stream_processors': 2560}",
+  compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 650W."
+});
+
+CREATE (p8:Product {
+  id: 8,
+  name: "Samsung 970 EVO Plus 1TB NVMe M.2 SSD",
+  image: "https://cdn.myapp.com/uploads/products/product_401.jpg",
+  description: "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing.",
+  product_type: "SSD",
+  price_eur: 99.99,
+  tags: ["ssd", "storage", "nvme", "m.2", "samsung"],
+  manufacturer: "Samsung",
+  weight_kg: 0.01,
+  dimensions_wh_cm: [8.0, 2.2],
+  product_status: "available",
+  specs: "{'capacity': '1TB', 'interface': 'NVMe M.2', 'read_speed': '3500MB/s', 'write_speed': '3300MB/s'}",
+  compatibility_info: "Requires an M.2 slot with NVMe support."
+});
+
+CREATE (p9:Product {
+  id: 9,
+  name: "Corsair RM850x 850W 80+ Gold",
+  image: "https://cdn.myapp.com/uploads/products/product_501.jpg",
+  description: "Corsair RMx series fully modular power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC. Using only Japanese 105°C capacitors, users can depend on an RMx PSUs' long life and reliability.",
+  product_type: "PSU",
+  price_eur: 134.90,
+  tags: ["psu", "power supply", "corsair", "850w", "gold"],
+  manufacturer: "Corsair",
+  weight_kg: 2.0,
+  dimensions_wh_cm: [15.0, 16.0],
+  product_status: "available",
+  specs: "{'wattage': '850W', 'efficiency': '80+ Gold', 'modularity': 'Fully Modular'}",
+  compatibility_info: "Standard ATX PSU size. Check case compatibility for length."
+});
+
+CREATE (p10:Product {
+  id: 10,
+  name: "NZXT H510",
+  image: "https://cdn.myapp.com/uploads/products/product_601.jpg",
+  description: "The NZXT H510 is a compact mid-tower ATX case that's easy to build in and offers flexibility for a variety of ATX parts. With a clean, modern design, iconic cable management bar, and tempered glass side panel, your build will look amazing.",
+  product_type: "Case",
+  price_eur: 79.99,
+  tags: ["case", "pc case", "atx", "nzxt"],
+  manufacturer: "NZXT",
+  weight_kg: 6.6,
+  dimensions_wh_cm: [46.0, 21.0],
+  product_status: "available",
+  specs: "{'type': 'Mid-Tower', 'motherboard_support': ['ATX', 'Micro-ATX', 'Mini-ITX']}",
+  compatibility_info: "Supports ATX, Micro-ATX, and Mini-ITX motherboards. Check GPU length and CPU cooler height clearance."
+});
+// ---------------------------------------------------------------------------------
 // create 10 example reviews
 CREATE (r1:Review {
   id: 1,
   customer_id: 1,
   product_id: 1,
   rating_stars: 4,
-  title: "good product",
-  body: "bought this product last week - didnt dissapoint",
-  timestamp: datetime("2025-03-24T23:59:59Z"),
+  title: "Great motherboard for my new build",
+  body: "I bought this motherboard last month and it has been working flawlessly. The BIOS is easy to navigate and it has all the features I needed. Solid choice for a mid-range gaming PC.",
+  timestamp: datetime("2025-01-10T18:30:00Z")
 });
-// ---------------------------------------------------------
-// create 10 example products
-CREATE (p1:Product {
-  id: 1,
-  image: "https://cdn.myapp.com/uploads/products/product_1.jpg",
-  description: "very cool",
-  product_type: "motherboard",
-  price_eur: 45,
-  tags: ["lga1131"],
-  manufacturer: "asus",
-  weight_kg: 5,
-  dimensions_c: [30, 50],
-   
+
+CREATE (r2:Review {
+  id: 2,
+  customer_id: 2,
+  product_id: 6,
+  rating_stars: 5,
+  title: "Top-tier performance!",
+  body: "This CPU is a beast! Handles everything I throw at it, from gaming to video editing, without breaking a sweat. Worth every penny.",
+  timestamp: datetime("2025-03-15T11:00:00Z")
 });
-// ---------------------------------------------------------
+
+CREATE (r3:Review {
+  id: 3,
+  customer_id: 3,
+  product_id: 5,
+  rating_stars: 3,
+  title: "It's okay, but...",
+  body: "The graphics card works as expected for the most part, but I've experienced some driver issues with recent games. Performance is decent for the price, but not amazing.",
+  timestamp: datetime("2025-03-18T20:15:00Z")
+});
+
+CREATE (r4:Review {
+  id: 4,
+  customer_id: 5,
+  product_id: 2,
+  rating_stars: 5,
+  title: "Excellent value for money",
+  body: "I'm really impressed with this processor. It offers great performance for its price. My system is much faster now. Highly recommended for budget builds.",
+  timestamp: datetime("2025-03-01T12:00:00Z")
+});
+
+CREATE (r5:Review {
+  id: 5,
+  customer_id: 7,
+  product_id: 4,
+  rating_stars: 2,
+  title: "Disappointed with the quality",
+  body: "The RAM modules felt cheap and one of the sticks was dead on arrival. I had to go through the hassle of an RMA. Not a great experience.",
+  timestamp: datetime("2025-02-05T09:00:00Z")
+});
+
+CREATE (r6:Review {
+  id: 6,
+  customer_id: 4,
+  product_id: 3,
+  rating_stars: 4,
+  title: "Solid GPU for 1080p gaming",
+  body: "This graphics card is perfect for 1080p gaming. I can run most modern titles at high settings with good frame rates. It's also surprisingly quiet.",
+  timestamp: datetime("2025-01-20T17:45:00Z")
+});
+
+CREATE (r7:Review {
+  id: 7,
+  customer_id: 6,
+  product_id: 7,
+  rating_stars: 4,
+  title: "Good, but runs a bit hot",
+  body: "A powerful graphics card that delivers great performance. My only complaint is that it tends to run a bit hot under load. Make sure you have good case airflow.",
+  timestamp: datetime("2025-03-20T14:00:00Z")
+});
+
+CREATE (r8:Review {
+  id: 8,
+  customer_id: 8,
+  product_id: 6,
+  rating_stars: 5,
+  title: "Incredible speed",
+  body: "Upgraded to this CPU and the difference is night and day. Everything is incredibly fast and responsive. A fantastic high-end processor.",
+  timestamp: datetime("2025-03-22T10:30:00Z")
+});
+
+CREATE (r9:Review {
+  id: 9,
+  customer_id: 9,
+  product_id: 7,
+  rating_stars: 4,
+  title: "Great mid-range option",
+  body: "This GPU strikes a great balance between price and performance. It's a solid choice for anyone looking to build a capable gaming rig without breaking the bank.",
+  timestamp: datetime("2025-02-25T18:00:00Z")
+});
+
+CREATE (r10:Review {
+  id: 10,
+  customer_id: 10,
+  product_id: 2,
+  rating_stars: 5,
+  title: "Perfect for my needs",
+  body: "This CPU is exactly what I was looking for. It's fast, efficient, and stays cool. I couldn't be happier with my purchase.",
+  timestamp: datetime("2025-03-23T16:00:00Z")
+});
+// ---------------------------------------------------------------------------------
+// add relationships between nodes

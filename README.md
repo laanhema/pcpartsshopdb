@@ -85,6 +85,7 @@ REVIEW
 PRODUCT
 
 - id (auto-generated)
+- name
 - product_image_url
 - product_name
 - product_description
