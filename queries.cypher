@@ -15,8 +15,7 @@ CREATE (c1:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-01-15T09:12:00Z"),
 		preferred_language: "fi"
-	}) 
-	,
+	}),
 CREATE (c2:Customer {
     id: 2,
 		email: "mika.korhonen@example.com",
@@ -30,8 +29,7 @@ CREATE (c2:Customer {
 		account_status: "active",
 		account_created_at: datetime("2023-10-02T14:45:00Z"),
 		preferred_language: "fi"
-	}) 
-	,
+	}),
 CREATE (c3:Customer {
     id: 3,
 		email: "emma.laakso@example.com",
@@ -45,8 +43,7 @@ CREATE (c3:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-03-21T08:30:00Z"),
 		preferred_language: "en"
-	}) 
-	,
+	}),
 CREATE (c4:Customer {
     id: 4,
 		email: "joonas.niemi@example.com",
@@ -60,8 +57,7 @@ CREATE (c4:Customer {
 		account_status: "pending_verification",
 		account_created_at: datetime("2025-01-11T11:05:00Z"),
 		preferred_language: "fi"
-	}) 
-	,
+	}),
 CREATE (c5:Customer {
     id: 5,
 		email: "sara.heikkila@example.com",
@@ -75,8 +71,7 @@ CREATE (c5:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-07-05T16:20:00Z"),
 		preferred_language: "sv"
-	}) 
-	,
+	}),
 CREATE (c6:Customer {
     id: 6,
 		email: "oliver.saarinen@example.com",
@@ -90,8 +85,7 @@ CREATE (c6:Customer {
 		account_status: "suspended",
 		account_created_at: datetime("2022-12-09T10:00:00Z"),
 		preferred_language: "en"
-	}) 
-	,
+	}),
 CREATE (c7:Customer {
     id: 7,
 		email: "liisa.hakala@example.com",
@@ -105,8 +99,7 @@ CREATE (c7:Customer {
 		account_status: "active",
 		account_created_at: datetime("2025-02-03T13:40:00Z"),
 		preferred_language: "fi"
-	}) 
-	,
+	}),
 CREATE (c8:Customer {
     id: 8,
 		email: "teemu.lehto@example.com",
@@ -120,8 +113,7 @@ CREATE (c8:Customer {
 		account_status: "active",
 		account_created_at: datetime("2023-06-14T07:55:00Z"),
 		preferred_language: "fi"
-	}) 
-	,
+	}),
 CREATE (c9:Customer {
     id: 9,
 		email: "maria.peltonen@example.com",
@@ -135,8 +127,7 @@ CREATE (c9:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-11-19T19:10:00Z"),
 		preferred_language: "en"
-	}) 
-	,
+	}),
 CREATE (c10:Customer {
     id: 10,
 		email: "niklas.kallio@example.com",
@@ -150,8 +141,7 @@ CREATE (c10:Customer {
 		account_status: "active",
 		account_created_at: datetime("2025-03-08T12:25:00Z"),
 		preferred_language: "fi"
-	}) 
-	;
+	}),
 // ---------------------------------------------------------------------------------
 // Create 10 example orders
 CREATE (o1:Order {
@@ -208,7 +198,7 @@ CREATE (o5:Order {
 		arrival_date: null,
 		total_price_eur: 899.99,
 		post_tracking_number: 346012789
-	});
+	}),
 CREATE (o6:Order {
     id: 6,
 		customer_id: 4,
@@ -263,7 +253,7 @@ CREATE (o10:Order {
 		arrival_date: null,
 		total_price_eur: 1549.50,
 		post_tracking_number: 321654987
-	});
+	}),
 // ---------------------------------------------------------------------------------
 // create 10 example products
 CREATE (p1:Product {
@@ -280,7 +270,7 @@ CREATE (p1:Product {
   product_status: "available",
   specs: "{'cores': 10, 'threads': 16, 'base_clock': '3.7GHz', 'boost_clock': '4.9GHz', 'socket': 'LGA1700'}",
   compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
-});
+}),
 CREATE (p2:Product {
   id: 2,
   name: "AMD Ryzen 5 5600X",
@@ -295,8 +285,7 @@ CREATE (p2:Product {
   product_status: "available",
   specs: "{'cores': 6, 'threads': 12, 'base_clock': '3.7GHz', 'boost_clock': '4.6GHz', 'socket': 'AM4'}",
   compatibility_info: "Requires AM4 socket motherboard. Check motherboard manufacturer's website for CPU support list."
-});
-
+}),
 CREATE (p3:Product {
   id: 3,
   name: "NVIDIA GeForce RTX 3060",
@@ -311,8 +300,7 @@ CREATE (p3:Product {
   product_status: "available",
   specs: "{'memory': '12GB GDDR6', 'boost_clock': '1777MHz', 'cuda_cores': 3584}",
   compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 550W."
-});
-
+}),
 CREATE (p4:Product {
   id: 4,
   name: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz",
@@ -327,8 +315,7 @@ CREATE (p4:Product {
   product_status: "available",
   specs: "{'capacity': '16GB', 'type': 'DDR4', 'speed': '3200MHz', 'modules': 2}",
   compatibility_info: "Compatible with DDR4 motherboards. Check motherboard QVL for full compatibility."
-});
-
+}),
 CREATE (p5:Product {
   id: 5,
   name: "ASUS ROG Strix B550-F Gaming",
@@ -343,8 +330,7 @@ CREATE (p5:Product {
   product_status: "available",
   specs: "{'socket': 'AM4', 'chipset': 'B550', 'form_factor': 'ATX'}",
   compatibility_info: "Supports 3rd Gen AMD Ryzen processors. BIOS update may be required for newer CPUs."
-});
-
+}),
 CREATE (p6:Product {
   id: 6,
   name: "Intel Core i9-12900K",
@@ -359,8 +345,7 @@ CREATE (p6:Product {
   product_status: "available",
   specs: "{'cores': 16, 'threads': 24, 'base_clock': '3.2GHz', 'boost_clock': '5.2GHz', 'socket': 'LGA1700'}",
   compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
-});
-
+}),
 CREATE (p7:Product {
   id: 7,
   name: "AMD Radeon RX 6700 XT",
@@ -375,8 +360,7 @@ CREATE (p7:Product {
   product_status: "out_of_stock",
   specs: "{'memory': '12GB GDDR6', 'boost_clock': '2581MHz', 'stream_processors': 2560}",
   compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 650W."
-});
-
+}),
 CREATE (p8:Product {
   id: 8,
   name: "Samsung 970 EVO Plus 1TB NVMe M.2 SSD",
@@ -391,8 +375,7 @@ CREATE (p8:Product {
   product_status: "available",
   specs: "{'capacity': '1TB', 'interface': 'NVMe M.2', 'read_speed': '3500MB/s', 'write_speed': '3300MB/s'}",
   compatibility_info: "Requires an M.2 slot with NVMe support."
-});
-
+}),
 CREATE (p9:Product {
   id: 9,
   name: "Corsair RM850x 850W 80+ Gold",
@@ -407,8 +390,7 @@ CREATE (p9:Product {
   product_status: "available",
   specs: "{'wattage': '850W', 'efficiency': '80+ Gold', 'modularity': 'Fully Modular'}",
   compatibility_info: "Standard ATX PSU size. Check case compatibility for length."
-});
-
+}),
 CREATE (p10:Product {
   id: 10,
   name: "NZXT H510",
@@ -423,7 +405,7 @@ CREATE (p10:Product {
   product_status: "available",
   specs: "{'type': 'Mid-Tower', 'motherboard_support': ['ATX', 'Micro-ATX', 'Mini-ITX']}",
   compatibility_info: "Supports ATX, Micro-ATX, and Mini-ITX motherboards. Check GPU length and CPU cooler height clearance."
-});
+}),
 // ---------------------------------------------------------------------------------
 // create 10 example reviews
 CREATE (r1:Review {
@@ -434,8 +416,7 @@ CREATE (r1:Review {
   title: "Great motherboard for my new build",
   body: "I bought this motherboard last month and it has been working flawlessly. The BIOS is easy to navigate and it has all the features I needed. Solid choice for a mid-range gaming PC.",
   timestamp: datetime("2025-01-10T18:30:00Z")
-});
-
+}),
 CREATE (r2:Review {
   id: 2,
   customer_id: 2,
@@ -444,8 +425,7 @@ CREATE (r2:Review {
   title: "Top-tier performance!",
   body: "This CPU is a beast! Handles everything I throw at it, from gaming to video editing, without breaking a sweat. Worth every penny.",
   timestamp: datetime("2025-03-15T11:00:00Z")
-});
-
+}),
 CREATE (r3:Review {
   id: 3,
   customer_id: 3,
@@ -454,8 +434,7 @@ CREATE (r3:Review {
   title: "It's okay, but...",
   body: "The graphics card works as expected for the most part, but I've experienced some driver issues with recent games. Performance is decent for the price, but not amazing.",
   timestamp: datetime("2025-03-18T20:15:00Z")
-});
-
+}),
 CREATE (r4:Review {
   id: 4,
   customer_id: 5,
@@ -464,8 +443,7 @@ CREATE (r4:Review {
   title: "Excellent value for money",
   body: "I'm really impressed with this processor. It offers great performance for its price. My system is much faster now. Highly recommended for budget builds.",
   timestamp: datetime("2025-03-01T12:00:00Z")
-});
-
+}),
 CREATE (r5:Review {
   id: 5,
   customer_id: 7,
@@ -474,8 +452,7 @@ CREATE (r5:Review {
   title: "Disappointed with the quality",
   body: "The RAM modules felt cheap and one of the sticks was dead on arrival. I had to go through the hassle of an RMA. Not a great experience.",
   timestamp: datetime("2025-02-05T09:00:00Z")
-});
-
+}),
 CREATE (r6:Review {
   id: 6,
   customer_id: 4,
@@ -484,8 +461,7 @@ CREATE (r6:Review {
   title: "Solid GPU for 1080p gaming",
   body: "This graphics card is perfect for 1080p gaming. I can run most modern titles at high settings with good frame rates. It's also surprisingly quiet.",
   timestamp: datetime("2025-01-20T17:45:00Z")
-});
-
+}),
 CREATE (r7:Review {
   id: 7,
   customer_id: 6,
@@ -494,8 +470,7 @@ CREATE (r7:Review {
   title: "Good, but runs a bit hot",
   body: "A powerful graphics card that delivers great performance. My only complaint is that it tends to run a bit hot under load. Make sure you have good case airflow.",
   timestamp: datetime("2025-03-20T14:00:00Z")
-});
-
+}),
 CREATE (r8:Review {
   id: 8,
   customer_id: 8,
@@ -504,8 +479,7 @@ CREATE (r8:Review {
   title: "Incredible speed",
   body: "Upgraded to this CPU and the difference is night and day. Everything is incredibly fast and responsive. A fantastic high-end processor.",
   timestamp: datetime("2025-03-22T10:30:00Z")
-});
-
+}),
 CREATE (r9:Review {
   id: 9,
   customer_id: 9,
@@ -514,8 +488,7 @@ CREATE (r9:Review {
   title: "Great mid-range option",
   body: "This GPU strikes a great balance between price and performance. It's a solid choice for anyone looking to build a capable gaming rig without breaking the bank.",
   timestamp: datetime("2025-02-25T18:00:00Z")
-});
-
+}),
 CREATE (r10:Review {
   id: 10,
   customer_id: 10,
@@ -524,6 +497,17 @@ CREATE (r10:Review {
   title: "Perfect for my needs",
   body: "This CPU is exactly what I was looking for. It's fast, efficient, and stays cool. I couldn't be happier with my purchase.",
   timestamp: datetime("2025-03-23T16:00:00Z")
-});
+}),
 // ---------------------------------------------------------------------------------
 // add relationships between nodes
+CREATE (c1)-[:PLACED]->(o1),
+       (c2)-[:PLACED]->(o2),
+       (c3)-[:PLACED]->(o3),
+       (c4)-[:PLACED]->(o4)
+       (c5)-[:PLACED]->(o5),
+       (c6)-[:PLACED]->(o6),
+       (c7)-[:PLACED]->(o7),
+       (c8)-[:PLACED]->(o8)
+       (c9)-[:PLACED]->(o9),
+       (c10)-[:PLACED]->(o10),
+;
