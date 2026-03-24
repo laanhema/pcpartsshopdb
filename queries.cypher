@@ -530,4 +530,15 @@ CREATE (c1:Customer {
        (o10)-[:INCLUDED]->(p2),
        (o10)-[:INCLUDED]->(p4),
        (o10)-[:INCLUDED]->(p8),
+// create links between customers and reviews and products:
+       (c1)-[:WROTE]->(r1)-[:ABOUT]->(p1),
+       (c2)-[:WROTE]->(r2)-[:ABOUT]->(p6),
+       (c3)-[:WROTE]->(r3)-[:ABOUT]->(p5),
+       (c5)-[:WROTE]->(r4)-[:ABOUT]->(p2),
+       (c7)-[:WROTE]->(r5)-[:ABOUT]->(p4),
+       (c4)-[:WROTE]->(r6)-[:ABOUT]->(p3),
+       (c6)-[:WROTE]->(r7)-[:ABOUT]->(p7),
+       (c8)-[:WROTE]->(r8)-[:ABOUT]->(p6),
+       (c9)-[:WROTE]->(r9)-[:ABOUT]->(p7),
+       (c10)-[:WROTE]->(r10)-[:ABOUT]->(p2)      
 ;
