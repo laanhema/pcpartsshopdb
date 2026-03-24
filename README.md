@@ -16,11 +16,12 @@ kanta rakennetaan kyselyjen pohjalta
 eli mitä haluaisin nähdä tästä tietokannasta:
 
 1. "Tämän komponentin tilanneet ovat myös tilanneet näidä tuotteita (näytä lista)." v
-2. "Haluan nähdä tämän komponentin arvostelut ja ketkä käyttäjät ovat kirjoittaneet ne"
+2. "Haluan nähdä tämän komponentin arvostelut ja ketkä käyttäjät ovat kirjoittaneet ne" v
 3. "Haluan nähdä tämän komponentin kanssa varmasti yhteensopivat komponentit" esim. käykö tämä CPU tähän motherboardiin chipset mikälie v
-4. "Haluan nähdä ketkä ovat tilanneet tämän tuotteen (sisältyy heidän tilaukseen tilauksiin)"
-5. "Haluan nähdä milloin asiakkaat tilaavat kaikista usein tuotteita"
-6. "Haluan nähdä hyvin arvostellut tuotteet jotka ovat kategoriaa GPU 4-5 tähteä"
+4. "Haluan nähdä ketkä ovat tilanneet tämän tuotteen (sisältyy heidän tilaukseen tilauksiin)" v
+5. "Haluan nähdä hyvin arvostellut tuotteet jotka ovat kategoriaa GPU 4-5 tähteä" v
+
+6. "Haluan nähdä milloin asiakkaat tilaavat kaikista usein tuotteita"
 
 <hr>
 
