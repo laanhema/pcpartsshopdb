@@ -541,4 +541,20 @@ CREATE (c1:Customer {
        (c8)-[:WROTE]->(r8)-[:ABOUT]->(p6),
        (c9)-[:WROTE]->(r9)-[:ABOUT]->(p7),
        (c10)-[:WROTE]->(r10)-[:ABOUT]->(p2)      
+// create links between products regarding compatibility:
+       (p1)-[:IS_COMPATIBLE_WITH]->(p2),
+       (p1)-[:IS_COMPATIBLE_WITH]->(p6),
+       (p1)-[:IS_COMPATIBLE_WITH]->(p5),
+       (p2)-[:IS_COMPATIBLE_WITH]->(p5),
+       (p3)-[:IS_COMPATIBLE_WITH]->(p5),
+       (p3)-[:IS_COMPATIBLE_WITH]->(p9),
+       (p4)-[:IS_COMPATIBLE_WITH]->(p5),
+       (p4)-[:IS_COMPATIBLE_WITH]->(p2),
+       (p5)-[:IS_COMPATIBLE_WITH]->(p8),
+       (p5)-[:IS_COMPATIBLE_WITH]->(p9),
+       (p5)-[:IS_COMPATIBLE_WITH]->(p10),
+       (p4)-[:IS_COMPATIBLE_WITH]->(p6),
+       (p7)-[:IS_COMPATIBLE_WITH]->(p5),
+       (p7)-[:IS_COMPATIBLE_WITH]->(p9),
+       (p9)-[:IS_COMPATIBLE_WITH]->(p10)
 ;
