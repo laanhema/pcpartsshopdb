@@ -546,3 +546,12 @@ CREATE (c1:Customer {
        (p7)-[:IS_COMPATIBLE_WITH]->(p9),
        (p9)-[:IS_COMPATIBLE_WITH]->(p10)
 ;
+// ---------------------------------------------------------------------------------
+// delete constraints
+DROP CONSTRAINT customer_id_unique IF EXISTS;
+DROP CONSTRAINT customer_email_unique IF EXISTS;
+DROP CONSTRAINT product_id_unique IF EXISTS;
+DROP CONSTRAINT product_name_unique IF EXISTS;
+DROP CONSTRAINT order_id_unique IF EXISTS;
+DROP CONSTRAINT order_ptn_unique IF EXISTS;
+DROP CONSTRAINT review_id_unique IF EXISTS;
