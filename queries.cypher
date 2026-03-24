@@ -1,6 +1,9 @@
 // tyhjennetään ensin tietokanta jotta päästään aloittamaan ns. puhtaalta pöydältä
 MATCH (n) DETACH DELETE n;
 // ---------------------------------------------------------------------------------
+// tällä voi palauttaa kaiken tietokannasta nopeasti
+MATCH (n) RETURN n;
+// ---------------------------------------------------------------------------------
 // create 10 example customers
 CREATE (c1:Customer {
     id: 1,
@@ -15,8 +18,7 @@ CREATE (c1:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-01-15T09:12:00Z"),
 		preferred_language: "fi"
-	}),
-CREATE (c2:Customer {
+	}), (c2:Customer {
     id: 2,
 		email: "mika.korhonen@example.com",
 		password_hash: "$2b$12$H7nP3tR9kL1vX6mQ2dS8wYu4Bf9Jk2pM6rT1xC8vN3sD5gH7qL0wA",
@@ -29,8 +31,7 @@ CREATE (c2:Customer {
 		account_status: "active",
 		account_created_at: datetime("2023-10-02T14:45:00Z"),
 		preferred_language: "fi"
-	}),
-CREATE (c3:Customer {
+	}), (c3:Customer {
     id: 3,
 		email: "emma.laakso@example.com",
 		password_hash: "$2b$12$Z2vD8mK1qR5tY9pL3nH6wFc7Gx1Pj4sN8dT2kV5rM9uB3hQ6yL0aW",
@@ -43,8 +44,7 @@ CREATE (c3:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-03-21T08:30:00Z"),
 		preferred_language: "en"
-	}),
-CREATE (c4:Customer {
+	}), (c4:Customer {
     id: 4,
 		email: "joonas.niemi@example.com",
 		password_hash: "$2b$12$M5kT1vN7pQ3rX8dL2wH9uCr2Jm8Fq1tV6xD3sK9pB4nG7hL0yW5aC",
@@ -57,8 +57,7 @@ CREATE (c4:Customer {
 		account_status: "pending_verification",
 		account_created_at: datetime("2025-01-11T11:05:00Z"),
 		preferred_language: "fi"
-	}),
-CREATE (c5:Customer {
+	}), (c5:Customer {
     id: 5,
 		email: "sara.heikkila@example.com",
 		password_hash: "$2b$12$P1xR6mD9kT2vL8qN4wH7uYn5Cj0Gm3sQ7tV1xK8pD2rF9hL4yB6aW",
@@ -71,8 +70,7 @@ CREATE (c5:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-07-05T16:20:00Z"),
 		preferred_language: "en"
-	}),
-CREATE (c6:Customer {
+	}), (c6:Customer {
     id: 6,
 		email: "oliver.saarinen@example.com",
 		password_hash: "$2b$12$L8qN3vT1mK7pR5dX2wH9uFt4Hk9Dq2sV6xP1mC8rN3gJ5yL0wB7aE",
@@ -85,8 +83,7 @@ CREATE (c6:Customer {
 		account_status: "deleted",
 		account_created_at: datetime("2022-12-09T10:00:00Z"),
 		preferred_language: "en"
-	}),
-CREATE (c7:Customer {
+	}), (c7:Customer {
     id: 7,
 		email: "liisa.hakala@example.com",
 		password_hash: "$2b$12$R3mK7pV1xD8qT5nL2wH9uCp6Fj1Hq4sN8tV2xK5rD9mG3yL0wB7aU",
@@ -99,8 +96,7 @@ CREATE (c7:Customer {
 		account_status: "active",
 		account_created_at: datetime("2025-02-03T13:40:00Z"),
 		preferred_language: "fi"
-	}),
-CREATE (c8:Customer {
+	}), (c8:Customer {
     id: 8,
 		email: "teemu.lehto@example.com",
 		password_hash: "$2b$12$T9vL2mQ7pR1kD6xN3wH8uYk3Gm8Dq1sV5xP2tC9rN4hJ6yL0wB7aF",
@@ -113,8 +109,7 @@ CREATE (c8:Customer {
 		account_status: "active",
 		account_created_at: datetime("2023-06-14T07:55:00Z"),
 		preferred_language: "fi"
-	}),
-CREATE (c9:Customer {
+	}), (c9:Customer {
     id: 9,
 		email: "maria.peltonen@example.com",
 		password_hash: "$2b$12$D4pR8mK1vT7qL2xN5wH9uCs1Hk6Fq3tV9xP2mC8rN4gJ5yL0wB7aE",
@@ -127,8 +122,7 @@ CREATE (c9:Customer {
 		account_status: "active",
 		account_created_at: datetime("2024-11-19T19:10:00Z"),
 		preferred_language: "en"
-	}),
-CREATE (c10:Customer {
+	}), (c10:Customer {
     id: 10,
 		email: "niklas.kallio@example.com",
 		password_hash: "$2b$12$N7mQ2vT5pR1kD8xL3wH9uYq4Jg9Dk2sV6xP1tC8rN3hF5yL0wB7aM",
@@ -143,135 +137,23 @@ CREATE (c10:Customer {
 		preferred_language: "fi"
 	}),
 // ---------------------------------------------------------------------------------
-// Create 10 example orders
-CREATE (o1:Order {
-    id: 1,
-		customer_id: 1,
-		included_products: [1, 5],
-		order_status: "delivered",
-		order_date: datetime("2024-12-15T10:30:00Z"),
-		estimated_arrival_date: datetime("2024-12-22T23:59:59Z"),
-		arrival_date: datetime("2024-12-21T14:20:00Z"),
-		total_price_eur: 1299.99,
-		post_tracking_number: 432891021
-	}),
-CREATE (o2:Order {
-    id: 2,
-		customer_id: 2,
-		included_products: [6, 3, 4],
-		order_status: "being processed",
-		order_date: datetime("2025-03-10T08:15:00Z"),
-		estimated_arrival_date: datetime("2025-03-17T23:59:59Z"),
-		arrival_date: null,
-		total_price_eur: 2849.50,
-		post_tracking_number: 125920323
-	}),
-CREATE (o3:Order {
-    id: 3,
-		customer_id: 3,
-		included_products: [5, 4],
-		order_status: "shipped",
-		order_date: datetime("2025-03-12T16:45:00Z"),
-		estimated_arrival_date: datetime("2025-03-19T23:59:59Z"),
-		arrival_date: null,
-		total_price_eur: 749.99,
-		post_tracking_number: 587923014
-	}),
-CREATE (o4:Order {
-    id: 4,
-		customer_id: 5,
-		included_products: [2, 3, 9],
-		order_status: "delivered",
-		order_date: datetime("2025-02-20T11:00:00Z"),
-		estimated_arrival_date: datetime("2025-02-27T23:59:59Z"),
-		arrival_date: datetime("2025-02-25T09:30:00Z"),
-		total_price_eur: 1649.00,
-		post_tracking_number: 912834756
-	}),
-CREATE (o5:Order {
-    id: 5,
-		customer_id: 7,
-		included_products: [1, 4],
-		order_status: "cancelled",
-		order_date: datetime("2025-01-30T14:20:00Z"),
-		estimated_arrival_date: datetime("2025-02-06T23:59:59Z"),
-		arrival_date: null,
-		total_price_eur: 899.99,
-		post_tracking_number: 346012789
-	}),
-CREATE (o6:Order {
-    id: 6,
-		customer_id: 4,
-		included_products: [3, 8],
-		order_status: "delivered",
-		order_date: datetime("2025-01-05T09:45:00Z"),
-		estimated_arrival_date: datetime("2025-01-12T23:59:59Z"),
-		arrival_date: datetime("2025-01-11T16:10:00Z"),
-		total_price_eur: 569.50,
-		post_tracking_number: 201847562
-	}),
-CREATE (o7:Order {
-    id: 7,
-		customer_id: 6,
-		included_products: [6, 7, 10],
-		order_status: "shipped",
-		order_date: datetime("2025-03-14T13:20:00Z"),
-		estimated_arrival_date: datetime("2025-03-21T23:59:59Z"),
-		arrival_date: null,
-		total_price_eur: 1899.75,
-		post_tracking_number: 456789123
-	}),
-CREATE (o8:Order {
-    id: 8,
-		customer_id: 8,
-		included_products: [6, 4],
-		order_status: "being processed",
-		order_date: datetime("2025-03-16T10:00:00Z"),
-		estimated_arrival_date: datetime("2025-03-23T23:59:59Z"),
-		arrival_date: null,
-		total_price_eur: 2199.99,
-		post_tracking_number: 789012345
-	}),
-CREATE (o9:Order {
-    id: 9,
-		customer_id: 9,
-		included_products: [7, 4, 9],
-		order_status: "delivered",
-		order_date: datetime("2025-02-10T14:30:00Z"),
-		estimated_arrival_date: datetime("2025-02-17T23:59:59Z"),
-		arrival_date: datetime("2025-02-16T11:45:00Z"),
-		total_price_eur: 1399.00,
-		post_tracking_number: 654321098
-	}),
-CREATE (o10:Order {
-    id: 10,
-		customer_id: 10,
-		included_products: [2, 4, 8],
-		order_status: "being processed",
-		order_date: datetime("2025-03-17T15:55:00Z"),
-		estimated_arrival_date: datetime("2025-03-24T23:59:59Z"),
-		arrival_date: null,
-		total_price_eur: 1549.50,
-		post_tracking_number: 321654987
-	}),
-// ---------------------------------------------------------------------------------
 // create 10 example products
-CREATE (p1:Product {
+(p1:Product {
   id: 1,
-  product_type: "CPU",
-  name: "Intel Core i5-12600K",
+  product_type: "CPU Cooler",
+  name: "Noctua NH-D15",
   image: "https://cdn.myapp.com/uploads/products/product_1.jpg",
-  description: "12th Gen Intel Core i5-12600K desktop processor. Featuring PCIe 5.0 & 4.0 support, DDR5 and DDR4 support, unlocked 12th Gen Intel Core desktop processors are optimized for enthusiast gamers and serious creators and help deliver high performance overclocking for an added boost.",
-  price_eur: 289.99,
-  tags: ["lga1700", "intel", "cpu", "processor"],
-  manufacturer: "Intel",
-  weight_kg: 0.1,
-  dimensions_wh_cm: [4.5, 3.75],
+  description: "The NH-D15 is an award-winning flagship model premium-quality quiet CPU cooler, built on the basis of the legendary NH-D14.",
+  price_eur: 119.90,
+  tags: ["noctua", "cooler", "cpu cooler", "air cooling", "nh-d15"],
+  manufacturer: "Noctua",
+  weight_kg: 1.32,
+  dimensions_wh_cm: [15.0, 16.5],
   product_status: "available",
-  specs: "{'cores': 10, 'threads': 16, 'base_clock': '3.7GHz', 'boost_clock': '4.9GHz', 'socket': 'LGA1700'}",
-  compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
-}),
-CREATE (p2:Product {
+  specs: "{'fans': 2, 'fan_size': '140mm', 'rpm': '1500', 'noise_level': '24.6 dB(A)'}",
+  compatibility_info: "Compatible with Intel LGA1700, LGA1200, LGA115x and AMD AM4, AM5."
+  }),
+(p2:Product {
   id: 2,
   product_type: "CPU",
   name: "AMD Ryzen 5 5600X",
@@ -286,7 +168,7 @@ CREATE (p2:Product {
   specs: "{'cores': 6, 'threads': 12, 'base_clock': '3.7GHz', 'boost_clock': '4.6GHz', 'socket': 'AM4'}",
   compatibility_info: "Requires AM4 socket motherboard. Check motherboard manufacturer's website for CPU support list."
 }),
-CREATE (p3:Product {
+(p3:Product {
   id: 3,
   product_type: "GPU",
   name: "NVIDIA GeForce RTX 3060",
@@ -301,7 +183,7 @@ CREATE (p3:Product {
   specs: "{'memory': '12GB GDDR6', 'boost_clock': '1777MHz', 'cuda_cores': 3584}",
   compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 550W."
 }),
-CREATE (p4:Product {
+(p4:Product {
   id: 4,
   product_type: "RAM",
   name: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz",
@@ -316,7 +198,7 @@ CREATE (p4:Product {
   specs: "{'capacity': '16GB', 'type': 'DDR4', 'speed': '3200MHz', 'modules': 2}",
   compatibility_info: "Compatible with DDR4 motherboards. Check motherboard QVL for full compatibility."
 }),
-CREATE (p5:Product {
+(p5:Product {
   id: 5,
   product_type: "Motherboard",
   name: "ASUS ROG Strix B550-F Gaming",
@@ -331,7 +213,7 @@ CREATE (p5:Product {
   specs: "{'socket': 'AM4', 'chipset': 'B550', 'form_factor': 'ATX'}",
   compatibility_info: "Supports 3rd Gen AMD Ryzen processors. BIOS update may be required for newer CPUs."
 }),
-CREATE (p6:Product {
+(p6:Product {
   id: 6,
   product_type: "CPU",
   name: "Intel Core i9-12900K",
@@ -346,7 +228,7 @@ CREATE (p6:Product {
   specs: "{'cores': 16, 'threads': 24, 'base_clock': '3.2GHz', 'boost_clock': '5.2GHz', 'socket': 'LGA1700'}",
   compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
 }),
-CREATE (p7:Product {
+(p7:Product {
   id: 7,
   product_type: "GPU",
   name: "AMD Radeon RX 6700 XT",
@@ -361,7 +243,7 @@ CREATE (p7:Product {
   specs: "{'memory': '12GB GDDR6', 'boost_clock': '2581MHz', 'stream_processors': 2560}",
   compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 650W."
 }),
-CREATE (p8:Product {
+(p8:Product {
   id: 8,
   product_type: "SSD",
   name: "Samsung 970 EVO Plus 1TB NVMe M.2 SSD",
@@ -376,9 +258,9 @@ CREATE (p8:Product {
   specs: "{'capacity': '1TB', 'interface': 'NVMe M.2', 'read_speed': '3500MB/s', 'write_speed': '3300MB/s'}",
   compatibility_info: "Requires an M.2 slot with NVMe support."
 }),
-CREATE (p9:Product {
+(p9:Product {
   id: 9,
-  product_type: "PSU",
+  product_type: "Power Supply",
   name: "Corsair RM850x 850W 80+ Gold",
   image: "https://cdn.myapp.com/uploads/products/product_9.jpg",
   description: "Corsair RMx series fully modular power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC. Using only Japanese 105°C capacitors, users can depend on an RMx PSUs' long life and reliability.",
@@ -391,7 +273,7 @@ CREATE (p9:Product {
   specs: "{'wattage': '850W', 'efficiency': '80+ Gold', 'modularity': 'Fully Modular'}",
   compatibility_info: "Standard ATX PSU size. Check case compatibility for length."
 }),
-CREATE (p10:Product {
+(p10:Product {
   id: 10,
   product_type: "Case",
   name: "NZXT H510",
@@ -407,107 +289,245 @@ CREATE (p10:Product {
   compatibility_info: "Supports ATX, Micro-ATX, and Mini-ITX motherboards. Check GPU length and CPU cooler height clearance."
 }),
 // ---------------------------------------------------------------------------------
+// Create 10 example orders
+(o1:Order {
+    id: 1,
+		customer_id: 1,
+		included_products: [1, 5],
+		order_status: "delivered",
+		order_date: datetime("2024-12-15T10:30:00Z"),
+		estimated_arrival_date: datetime("2024-12-22T23:59:59Z"),
+		arrival_date: datetime("2024-12-21T14:20:00Z"),
+		total_price_eur: 1129.90,
+		post_tracking_number: 432891021
+	}),
+(o2:Order {
+    id: 2,
+		customer_id: 2,
+		included_products: [6, 3, 4],
+		order_status: "being processed",
+		order_date: datetime("2025-03-10T08:15:00Z"),
+		estimated_arrival_date: datetime("2025-03-17T23:59:59Z"),
+		arrival_date: null,
+		total_price_eur: 2849.50,
+		post_tracking_number: 125920323
+	}),
+(o3:Order {
+    id: 3,
+		customer_id: 3,
+		included_products: [5, 4],
+		order_status: "shipped",
+		order_date: datetime("2025-03-12T16:45:00Z"),
+		estimated_arrival_date: datetime("2025-03-19T23:59:59Z"),
+		arrival_date: null,
+		total_price_eur: 749.99,
+		post_tracking_number: 587923014
+	}),
+(o4:Order {
+    id: 4,
+		customer_id: 5,
+		included_products: [2, 3, 9],
+		order_status: "delivered",
+		order_date: datetime("2025-02-20T11:00:00Z"),
+		estimated_arrival_date: datetime("2025-02-27T23:59:59Z"),
+		arrival_date: datetime("2025-02-25T09:30:00Z"),
+		total_price_eur: 1649.00,
+		post_tracking_number: 912834756
+	}),
+(o5:Order {
+    id: 5,
+		customer_id: 7,
+		included_products: [1, 4],
+		order_status: "cancelled",
+		order_date: datetime("2025-01-30T14:20:00Z"),
+		estimated_arrival_date: datetime("2025-02-06T23:59:59Z"),
+		arrival_date: null,
+		total_price_eur: 729.90,
+		post_tracking_number: 346012789
+	}),
+(o6:Order {
+    id: 6,
+		customer_id: 4,
+		included_products: [3, 8],
+		order_status: "delivered",
+		order_date: datetime("2025-01-05T09:45:00Z"),
+		estimated_arrival_date: datetime("2025-01-12T23:59:59Z"),
+		arrival_date: datetime("2025-01-11T16:10:00Z"),
+		total_price_eur: 569.50,
+		post_tracking_number: 201847562
+	}),
+(o7:Order {
+    id: 7,
+		customer_id: 6,
+		included_products: [6, 7, 10],
+		order_status: "shipped",
+		order_date: datetime("2025-03-14T13:20:00Z"),
+		estimated_arrival_date: datetime("2025-03-21T23:59:59Z"),
+		arrival_date: null,
+		total_price_eur: 1899.75,
+		post_tracking_number: 456789123
+	}),
+(o8:Order {
+    id: 8,
+		customer_id: 8,
+		included_products: [6, 4],
+		order_status: "being processed",
+		order_date: datetime("2025-03-16T10:00:00Z"),
+		estimated_arrival_date: datetime("2025-03-23T23:59:59Z"),
+		arrival_date: null,
+		total_price_eur: 2199.99,
+		post_tracking_number: 789012345
+	}),
+(o9:Order {
+    id: 9,
+		customer_id: 9,
+		included_products: [7, 4, 9],
+		order_status: "delivered",
+		order_date: datetime("2025-02-10T14:30:00Z"),
+		estimated_arrival_date: datetime("2025-02-17T23:59:59Z"),
+		arrival_date: datetime("2025-02-16T11:45:00Z"),
+		total_price_eur: 1399.00,
+		post_tracking_number: 654321098
+	}),
+(o10:Order {
+    id: 10,
+		customer_id: 10,
+		included_products: [2, 4, 8],
+		order_status: "being processed",
+		order_date: datetime("2025-03-17T15:55:00Z"),
+		estimated_arrival_date: datetime("2025-03-24T23:59:59Z"),
+		arrival_date: null,
+		total_price_eur: 1549.50,
+		post_tracking_number: 321654987
+	}),
+// ---------------------------------------------------------------------------------
 // create 10 example reviews
-CREATE (r1:Review {
+(r1:Review {
   id: 1,
   customer_id: 1,
   product_id: 1,
-  rating_stars: 4,
-  title: "Great motherboard for my new build",
-  body: "I bought this motherboard last month and it has been working flawlessly. The BIOS is easy to navigate and it has all the features I needed. Solid choice for a mid-range gaming PC.",
-  timestamp: datetime("2025-01-10T18:30:00Z")
+  title: "Incredible cooling performance",
+  body: "This Noctua cooler is amazing. Kept my CPU temperatures well under 70C even under heavy load. The installation was straightforward and it runs super quiet.",
+  timestamp: datetime("2025-01-10T18:30:00Z"),
+  rating_stars: 4
 }),
-CREATE (r2:Review {
+(r2:Review {
   id: 2,
   customer_id: 2,
   product_id: 6,
-  rating_stars: 5,
   title: "Top-tier performance!",
   body: "This CPU is a beast! Handles everything I throw at it, from gaming to video editing, without breaking a sweat. Worth every penny.",
-  timestamp: datetime("2025-03-15T11:00:00Z")
+  timestamp: datetime("2025-03-15T11:00:00Z"),
+  rating_stars: 5
 }),
-CREATE (r3:Review {
+(r3:Review {
   id: 3,
   customer_id: 3,
   product_id: 5,
-  rating_stars: 3,
   title: "It's okay, but...",
   body: "The graphics card works as expected for the most part, but I've experienced some driver issues with recent games. Performance is decent for the price, but not amazing.",
-  timestamp: datetime("2025-03-18T20:15:00Z")
+  timestamp: datetime("2025-03-18T20:15:00Z"),
+  rating_stars: 3
 }),
-CREATE (r4:Review {
+(r4:Review {
   id: 4,
   customer_id: 5,
   product_id: 2,
-  rating_stars: 5,
   title: "Excellent value for money",
   body: "I'm really impressed with this processor. It offers great performance for its price. My system is much faster now. Highly recommended for budget builds.",
-  timestamp: datetime("2025-03-01T12:00:00Z")
+  timestamp: datetime("2025-03-01T12:00:00Z"),
+  rating_stars: 5
 }),
-CREATE (r5:Review {
+(r5:Review {
   id: 5,
   customer_id: 7,
   product_id: 4,
-  rating_stars: 2,
   title: "Disappointed with the quality",
   body: "The RAM modules felt cheap and one of the sticks was dead on arrival. I had to go through the hassle of an RMA. Not a great experience.",
-  timestamp: datetime("2025-02-05T09:00:00Z")
+  timestamp: datetime("2025-02-05T09:00:00Z"),
+  rating_stars: 2
 }),
-CREATE (r6:Review {
+(r6:Review {
   id: 6,
   customer_id: 4,
   product_id: 3,
-  rating_stars: 4,
   title: "Solid GPU for 1080p gaming",
   body: "This graphics card is perfect for 1080p gaming. I can run most modern titles at high settings with good frame rates. It's also surprisingly quiet.",
-  timestamp: datetime("2025-01-20T17:45:00Z")
+  timestamp: datetime("2025-01-20T17:45:00Z"),
+  rating_stars: 4
 }),
-CREATE (r7:Review {
+(r7:Review {
   id: 7,
   customer_id: 6,
   product_id: 7,
-  rating_stars: 4,
   title: "Good, but runs a bit hot",
   body: "A powerful graphics card that delivers great performance. My only complaint is that it tends to run a bit hot under load. Make sure you have good case airflow.",
-  timestamp: datetime("2025-03-20T14:00:00Z")
+  timestamp: datetime("2025-03-20T14:00:00Z"),
+  rating_stars: 4
 }),
-CREATE (r8:Review {
+(r8:Review {
   id: 8,
   customer_id: 8,
   product_id: 6,
-  rating_stars: 5,
   title: "Incredible speed",
   body: "Upgraded to this CPU and the difference is night and day. Everything is incredibly fast and responsive. A fantastic high-end processor.",
-  timestamp: datetime("2025-03-22T10:30:00Z")
+  timestamp: datetime("2025-03-22T10:30:00Z"),
+  rating_stars: 5
 }),
-CREATE (r9:Review {
+(r9:Review {
   id: 9,
   customer_id: 9,
   product_id: 7,
-  rating_stars: 4,
   title: "Great mid-range option",
   body: "This GPU strikes a great balance between price and performance. It's a solid choice for anyone looking to build a capable gaming rig without breaking the bank.",
-  timestamp: datetime("2025-02-25T18:00:00Z")
+  timestamp: datetime("2025-02-25T18:00:00Z"),
+  rating_stars: 4
 }),
-CREATE (r10:Review {
+(r10:Review {
   id: 10,
   customer_id: 10,
   product_id: 2,
-  rating_stars: 5,
   title: "Perfect for my needs",
   body: "This CPU is exactly what I was looking for. It's fast, efficient, and stays cool. I couldn't be happier with my purchase.",
-  timestamp: datetime("2025-03-23T16:00:00Z")
+  timestamp: datetime("2025-03-23T16:00:00Z"),
+  rating_stars: 5
 }),
 // ---------------------------------------------------------------------------------
 // add relationships between nodes
-CREATE (c1)-[:PLACED]->(o1),
-       (c2)-[:PLACED]->(o2),
-       (c3)-[:PLACED]->(o3),
-       (c4)-[:PLACED]->(o4)
-       (c5)-[:PLACED]->(o5),
-       (c6)-[:PLACED]->(o6),
-       (c7)-[:PLACED]->(o7),
-       (c8)-[:PLACED]->(o8)
-       (c9)-[:PLACED]->(o9),
-       (c10)-[:PLACED]->(o10),
+// create links between customers and orders and which products each order included:
+       (c1)-[:ORDERED]->(o1),
+       (o1)-[:INCLUDED]->(p1),
+       (o1)-[:INCLUDED]->(p5),
+       (c2)-[:ORDERED]->(o2),
+       (o2)-[:INCLUDED]->(p6),
+       (o2)-[:INCLUDED]->(p3),
+       (o2)-[:INCLUDED]->(p4),
+       (c3)-[:ORDERED]->(o3),
+       (o3)-[:INCLUDED]->(p5),
+       (o3)-[:INCLUDED]->(p4),
+       (c5)-[:ORDERED]->(o4),
+       (o4)-[:INCLUDED]->(p2),
+       (o4)-[:INCLUDED]->(p3),
+       (o4)-[:INCLUDED]->(p9),
+       (c7)-[:ORDERED]->(o5),
+       (o5)-[:INCLUDED]->(p1),
+       (o5)-[:INCLUDED]->(p4),
+       (c4)-[:ORDERED]->(o6),
+       (o6)-[:INCLUDED]->(p3),
+       (o6)-[:INCLUDED]->(p8),
+       (c6)-[:ORDERED]->(o7),
+       (o7)-[:INCLUDED]->(p6),
+       (o7)-[:INCLUDED]->(p7),
+       (o7)-[:INCLUDED]->(p10),
+       (c8)-[:ORDERED]->(o8),
+       (o8)-[:INCLUDED]->(p6),
+       (o8)-[:INCLUDED]->(p4),
+       (c9)-[:ORDERED]->(o9),
+       (o9)-[:INCLUDED]->(p7),
+       (o9)-[:INCLUDED]->(p4),
+       (o9)-[:INCLUDED]->(p9),
+       (c10)-[:ORDERED]->(o10),
+       (o10)-[:INCLUDED]->(p2),
+       (o10)-[:INCLUDED]->(p4),
+       (o10)-[:INCLUDED]->(p8),
 ;
