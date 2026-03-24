@@ -4,6 +4,24 @@ MATCH (n) DETACH DELETE n;
 // tällä voi palauttaa kaiken tietokannasta nopeasti
 MATCH (n) RETURN n;
 // ---------------------------------------------------------------------------------
+// add constraints
+CREATE CONSTRAINT customer_id_unique IF NOT EXISTS
+FOR (c:Customer) REQUIRE c.id IS UNIQUE;
+CREATE CONSTRAINT customer_email_unique IF NOT EXISTS
+FOR (c:Customer) REQUIRE c.email IS UNIQUE;
+
+CREATE CONSTRAINT product_id_unique IF NOT EXISTS
+FOR (p:Product) REQUIRE p.id IS UNIQUE;
+CREATE CONSTRAINT product_name_unique IF NOT EXISTS
+FOR (p:Product) REQUIRE p.name IS UNIQUE;
+
+CREATE CONSTRAINT order_id_unique IF NOT EXISTS
+FOR (o:Order) REQUIRE o.id IS UNIQUE;
+CREATE CONSTRAINT order_ptn_unique IF NOT EXISTS
+FOR (o:Order) REQUIRE o.post_tracking_number IS UNIQUE;
+
+CREATE CONSTRAINT review_id_unique IF NOT EXISTS
+FOR (r:Review) REQUIRE r.id IS UNIQUE;
 // create 10 example customers
 CREATE (c1:Customer {
     id: 1,
@@ -151,7 +169,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [15.0, 16.5],
   product_status: "available",
   specs: "{'fans': 2, 'fan_size': '140mm', 'rpm': '1500', 'noise_level': '24.6 dB(A)'}",
-  compatibility_info: "Compatible with Intel LGA1700, LGA1200, LGA115x and AMD AM4, AM5."
+  compatibility_info: "Compatible with Intel LGA1700, LGA1200, LGA115x and AMD AM4, AM5.",
+  products_in_stock: 23
   }),
 (p2:Product {
   id: 2,
@@ -166,7 +185,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [4.0, 4.0],
   product_status: "available",
   specs: "{'cores': 6, 'threads': 12, 'base_clock': '3.7GHz', 'boost_clock': '4.6GHz', 'socket': 'AM4'}",
-  compatibility_info: "Requires AM4 socket motherboard. Check motherboard manufacturer's website for CPU support list."
+  compatibility_info: "Requires AM4 socket motherboard. Check motherboard manufacturer's website for CPU support list.",
+  products_in_stock: 15
 }),
 (p3:Product {
   id: 3,
@@ -181,7 +201,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [24.2, 11.2],
   product_status: "available",
   specs: "{'memory': '12GB GDDR6', 'boost_clock': '1777MHz', 'cuda_cores': 3584}",
-  compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 550W."
+  compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 550W.",
+  products_in_stock: 19
 }),
 (p4:Product {
   id: 4,
@@ -196,7 +217,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [13.5, 3.4],
   product_status: "available",
   specs: "{'capacity': '16GB', 'type': 'DDR4', 'speed': '3200MHz', 'modules': 2}",
-  compatibility_info: "Compatible with DDR4 motherboards. Check motherboard QVL for full compatibility."
+  compatibility_info: "Compatible with DDR4 motherboards. Check motherboard QVL for full compatibility.",
+  products_in_stock: 95
 }),
 (p5:Product {
   id: 5,
@@ -211,7 +233,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [30.5, 24.4],
   product_status: "available",
   specs: "{'socket': 'AM4', 'chipset': 'B550', 'form_factor': 'ATX'}",
-  compatibility_info: "Supports 3rd Gen AMD Ryzen processors. BIOS update may be required for newer CPUs."
+  compatibility_info: "Supports 3rd Gen AMD Ryzen processors. BIOS update may be required for newer CPUs.",
+  products_in_stock: 27
 }),
 (p6:Product {
   id: 6,
@@ -226,7 +249,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [4.5, 3.75],
   product_status: "available",
   specs: "{'cores': 16, 'threads': 24, 'base_clock': '3.2GHz', 'boost_clock': '5.2GHz', 'socket': 'LGA1700'}",
-  compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory."
+  compatibility_info: "Requires LGA1700 socket motherboard. Compatible with DDR4 and DDR5 memory.",
+  products_in_stock: 20
 }),
 (p7:Product {
   id: 7,
@@ -241,7 +265,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [26.7, 11.0],
   product_status: "out_of_stock",
   specs: "{'memory': '12GB GDDR6', 'boost_clock': '2581MHz', 'stream_processors': 2560}",
-  compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 650W."
+  compatibility_info: "Requires a PCIe 4.0 x16 slot. Recommended PSU: 650W.",
+  products_in_stock: 15
 }),
 (p8:Product {
   id: 8,
@@ -256,7 +281,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [8.0, 2.2],
   product_status: "available",
   specs: "{'capacity': '1TB', 'interface': 'NVMe M.2', 'read_speed': '3500MB/s', 'write_speed': '3300MB/s'}",
-  compatibility_info: "Requires an M.2 slot with NVMe support."
+  compatibility_info: "Requires an M.2 slot with NVMe support.",
+  products_in_stock: 54
 }),
 (p9:Product {
   id: 9,
@@ -271,7 +297,8 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [15.0, 16.0],
   product_status: "available",
   specs: "{'wattage': '850W', 'efficiency': '80+ Gold', 'modularity': 'Fully Modular'}",
-  compatibility_info: "Standard ATX PSU size. Check case compatibility for length."
+  compatibility_info: "Standard ATX PSU size. Check case compatibility for length.",
+  products_in_stock: 22
 }),
 (p10:Product {
   id: 10,
@@ -286,14 +313,13 @@ CREATE (c1:Customer {
   dimensions_wh_cm: [46.0, 21.0],
   product_status: "available",
   specs: "{'type': 'Mid-Tower', 'motherboard_support': ['ATX', 'Micro-ATX', 'Mini-ITX']}",
-  compatibility_info: "Supports ATX, Micro-ATX, and Mini-ITX motherboards. Check GPU length and CPU cooler height clearance."
+  compatibility_info: "Supports ATX, Micro-ATX, and Mini-ITX motherboards. Check GPU length and CPU cooler height clearance.",
+  products_in_stock: 19
 }),
 // ---------------------------------------------------------------------------------
 // Create 10 example orders
 (o1:Order {
     id: 1,
-		customer_id: 1,
-		included_products: [1, 5],
 		order_status: "delivered",
 		order_date: datetime("2024-12-15T10:30:00Z"),
 		estimated_arrival_date: datetime("2024-12-22T23:59:59Z"),
@@ -303,8 +329,6 @@ CREATE (c1:Customer {
 	}),
 (o2:Order {
     id: 2,
-		customer_id: 2,
-		included_products: [6, 3, 4],
 		order_status: "being processed",
 		order_date: datetime("2025-03-10T08:15:00Z"),
 		estimated_arrival_date: datetime("2025-03-17T23:59:59Z"),
@@ -314,8 +338,6 @@ CREATE (c1:Customer {
 	}),
 (o3:Order {
     id: 3,
-		customer_id: 3,
-		included_products: [5, 4],
 		order_status: "shipped",
 		order_date: datetime("2025-03-12T16:45:00Z"),
 		estimated_arrival_date: datetime("2025-03-19T23:59:59Z"),
@@ -325,8 +347,6 @@ CREATE (c1:Customer {
 	}),
 (o4:Order {
     id: 4,
-		customer_id: 5,
-		included_products: [2, 3, 9],
 		order_status: "delivered",
 		order_date: datetime("2025-02-20T11:00:00Z"),
 		estimated_arrival_date: datetime("2025-02-27T23:59:59Z"),
@@ -336,8 +356,6 @@ CREATE (c1:Customer {
 	}),
 (o5:Order {
     id: 5,
-		customer_id: 7,
-		included_products: [1, 4],
 		order_status: "cancelled",
 		order_date: datetime("2025-01-30T14:20:00Z"),
 		estimated_arrival_date: datetime("2025-02-06T23:59:59Z"),
@@ -347,8 +365,6 @@ CREATE (c1:Customer {
 	}),
 (o6:Order {
     id: 6,
-		customer_id: 4,
-		included_products: [3, 8],
 		order_status: "delivered",
 		order_date: datetime("2025-01-05T09:45:00Z"),
 		estimated_arrival_date: datetime("2025-01-12T23:59:59Z"),
@@ -358,8 +374,6 @@ CREATE (c1:Customer {
 	}),
 (o7:Order {
     id: 7,
-		customer_id: 6,
-		included_products: [6, 7, 10],
 		order_status: "shipped",
 		order_date: datetime("2025-03-14T13:20:00Z"),
 		estimated_arrival_date: datetime("2025-03-21T23:59:59Z"),
@@ -369,8 +383,6 @@ CREATE (c1:Customer {
 	}),
 (o8:Order {
     id: 8,
-		customer_id: 8,
-		included_products: [6, 4],
 		order_status: "being processed",
 		order_date: datetime("2025-03-16T10:00:00Z"),
 		estimated_arrival_date: datetime("2025-03-23T23:59:59Z"),
@@ -380,8 +392,6 @@ CREATE (c1:Customer {
 	}),
 (o9:Order {
     id: 9,
-		customer_id: 9,
-		included_products: [7, 4, 9],
 		order_status: "delivered",
 		order_date: datetime("2025-02-10T14:30:00Z"),
 		estimated_arrival_date: datetime("2025-02-17T23:59:59Z"),
@@ -391,8 +401,6 @@ CREATE (c1:Customer {
 	}),
 (o10:Order {
     id: 10,
-		customer_id: 10,
-		included_products: [2, 4, 8],
 		order_status: "being processed",
 		order_date: datetime("2025-03-17T15:55:00Z"),
 		estimated_arrival_date: datetime("2025-03-24T23:59:59Z"),
@@ -404,8 +412,6 @@ CREATE (c1:Customer {
 // create 10 example reviews
 (r1:Review {
   id: 1,
-  customer_id: 1,
-  product_id: 1,
   title: "Incredible cooling performance",
   body: "This Noctua cooler is amazing. Kept my CPU temperatures well under 70C even under heavy load. The installation was straightforward and it runs super quiet.",
   timestamp: datetime("2025-01-10T18:30:00Z"),
@@ -413,8 +419,6 @@ CREATE (c1:Customer {
 }),
 (r2:Review {
   id: 2,
-  customer_id: 2,
-  product_id: 6,
   title: "Top-tier performance!",
   body: "This CPU is a beast! Handles everything I throw at it, from gaming to video editing, without breaking a sweat. Worth every penny.",
   timestamp: datetime("2025-03-15T11:00:00Z"),
@@ -422,8 +426,6 @@ CREATE (c1:Customer {
 }),
 (r3:Review {
   id: 3,
-  customer_id: 3,
-  product_id: 5,
   title: "It's okay, but...",
   body: "The graphics card works as expected for the most part, but I've experienced some driver issues with recent games. Performance is decent for the price, but not amazing.",
   timestamp: datetime("2025-03-18T20:15:00Z"),
@@ -431,8 +433,6 @@ CREATE (c1:Customer {
 }),
 (r4:Review {
   id: 4,
-  customer_id: 5,
-  product_id: 2,
   title: "Excellent value for money",
   body: "I'm really impressed with this processor. It offers great performance for its price. My system is much faster now. Highly recommended for budget builds.",
   timestamp: datetime("2025-03-01T12:00:00Z"),
@@ -440,8 +440,6 @@ CREATE (c1:Customer {
 }),
 (r5:Review {
   id: 5,
-  customer_id: 7,
-  product_id: 4,
   title: "Disappointed with the quality",
   body: "The RAM modules felt cheap and one of the sticks was dead on arrival. I had to go through the hassle of an RMA. Not a great experience.",
   timestamp: datetime("2025-02-05T09:00:00Z"),
@@ -449,8 +447,6 @@ CREATE (c1:Customer {
 }),
 (r6:Review {
   id: 6,
-  customer_id: 4,
-  product_id: 3,
   title: "Solid GPU for 1080p gaming",
   body: "This graphics card is perfect for 1080p gaming. I can run most modern titles at high settings with good frame rates. It's also surprisingly quiet.",
   timestamp: datetime("2025-01-20T17:45:00Z"),
@@ -458,8 +454,6 @@ CREATE (c1:Customer {
 }),
 (r7:Review {
   id: 7,
-  customer_id: 6,
-  product_id: 7,
   title: "Good, but runs a bit hot",
   body: "A powerful graphics card that delivers great performance. My only complaint is that it tends to run a bit hot under load. Make sure you have good case airflow.",
   timestamp: datetime("2025-03-20T14:00:00Z"),
@@ -467,8 +461,6 @@ CREATE (c1:Customer {
 }),
 (r8:Review {
   id: 8,
-  customer_id: 8,
-  product_id: 6,
   title: "Incredible speed",
   body: "Upgraded to this CPU and the difference is night and day. Everything is incredibly fast and responsive. A fantastic high-end processor.",
   timestamp: datetime("2025-03-22T10:30:00Z"),
@@ -476,8 +468,6 @@ CREATE (c1:Customer {
 }),
 (r9:Review {
   id: 9,
-  customer_id: 9,
-  product_id: 7,
   title: "Great mid-range option",
   body: "This GPU strikes a great balance between price and performance. It's a solid choice for anyone looking to build a capable gaming rig without breaking the bank.",
   timestamp: datetime("2025-02-25T18:00:00Z"),
@@ -485,8 +475,6 @@ CREATE (c1:Customer {
 }),
 (r10:Review {
   id: 10,
-  customer_id: 10,
-  product_id: 2,
   title: "Perfect for my needs",
   body: "This CPU is exactly what I was looking for. It's fast, efficient, and stays cool. I couldn't be happier with my purchase.",
   timestamp: datetime("2025-03-23T16:00:00Z"),
@@ -540,7 +528,7 @@ CREATE (c1:Customer {
        (c6)-[:WROTE]->(r7)-[:ABOUT]->(p7),
        (c8)-[:WROTE]->(r8)-[:ABOUT]->(p6),
        (c9)-[:WROTE]->(r9)-[:ABOUT]->(p7),
-       (c10)-[:WROTE]->(r10)-[:ABOUT]->(p2)      
+       (c10)-[:WROTE]->(r10)-[:ABOUT]->(p2),      
 // create links between products regarding compatibility:
        (p1)-[:IS_COMPATIBLE_WITH]->(p2),
        (p1)-[:IS_COMPATIBLE_WITH]->(p6),
