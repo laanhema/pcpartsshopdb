@@ -1,4 +1,4 @@
-- tietokone-osien suositus db siis verkkokauppa tietokoneosien ostamiseen mutta spesifimmin ostoksien mukaan suositusten tekemiseen esim amazon tyylinen (tämän tuotteen tilanneet henkilöt ovat ostaneet myös näitä: [näyttää tuotteita]) tai jimms tyylinen (KallisDB)
+- tietokone-osien suositus db siis käyttötarkoitus on verkkokauppa tietokoneosien ostamiseen mutta spesifimmin ostoksien mukaan suositusten tekemiseen esim amazon verkkokaupan tyylisesti "tämän tuotteen tilanneet henkilöt ovat ostaneet myös näitä: [näyttää tuotteita]".
   - eli käyttäjät
     - mitä tuotteita kukin on ostanut
     - sukupuoli mby nainen mies muu, vaikuttaa ostotottumuksiin
@@ -9,7 +9,22 @@
 
 <hr>
 
-GPU / CPU / RAM / MOTHERBOARD / CASE
+### Käyttötapausten määrittely
+
+kanta rakennetaan kyselyjen pohjalta
+
+eli mitä haluaisin nähdä tästä tietokannasta:
+
+1. "Tämän komponentin tilanneet ovat myös tilanneet näidä tuotteita (näytä lista)."
+2. "Haluan nähdä tämän komponentin arvostelut ja ketkä käyttäjät ovat kirjoittaneet ne"
+3. "Haluan nähdä tämän komponentin kanssa varmasti yhteensopivat komponentit" esim. käykö tämä CPU tähän motherboardiin chipset mikälie
+4. "Haluan nähdä ketkä ovat tilanneet tämän tuotteen (sisältyy heidän tilaukseen tilauksiin)"
+5. "Haluan nähdä milloin asiakkaat tilaavat kaikista usein tuotteita"
+6. "Haluan nähdä hyvin arvostellut tuotteet jotka ovat kategoriaa GPU 4-5 tähteä"
+
+<hr>
+
+GPU / CPU / RAM / MOTHERBOARD / CASE / POWER SUPPLY
 Merkki: AMD / NVIDIA / BEQUIET / FRACTAL / NOCTUA / NZXT
 Liitännät: PCI-E 5.0
 Muisti: 16GB GDDR5
@@ -18,13 +33,6 @@ Clock-timing hz: 2460 MHz
 types of components to save:
 
 motherboard, CPU, GPU, RAM, SSD, HDD, M.2, Power Supply, Case, CD-drive, DVD-drive, Blu-Ray-drive, soundcard, cable, thermal paste, mouse, keyboard, screen, CPU Cooler, Fan, Fan Controller, Network Card, Bluetooth Adapter, Capture Card, Riser Cable,
-
-kanta rakennetaan kyselyjen pohjalta
-
-eli mitä haluaisin hakea tietokannasta:
-
-"Haluan nähdä ketkä ovat tilanneet tämän tuotteen (sisältyy heidän tilaukseen tilauksiin)"
-"Haluan nähdä ketkä ovat arvostelleet tämän komponentin"
 
 <hr>
 
@@ -43,7 +51,7 @@ eli mitä haluaisin hakea tietokannasta:
 
 CUSTOMER
 
-- id (auto-generated)
+- id (auto-generated) UNIQUE
 - email
 - password_hash
 - name
@@ -60,7 +68,7 @@ CUSTOMER
 
 ORDER
 
-- id (auto-generated)
+- id (auto-generated) UNIQUE
 - customer_id
 - included_products[]
 - order_status
@@ -74,7 +82,7 @@ ORDER
 
 REVIEW
 
-- id (auto-generated)
+- id (auto-generated) UINIQUE
 - customer_id
 - product_id
 - rating
@@ -109,7 +117,7 @@ Neo4j Project
 
 NoSQL-oppimistehtävä: Pcpartsshop-tietokanta (Neo4j).
 
-Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta käyttäen Neo4j:tä. Pääfokuksena tietokannassa on suosittelut. Asiakkaille suositellaan muita tuotteita joita on ostettu tämän tuotteen kanssa.
+Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta käyttäen Neo4j:tä. Pääfokuksena tietokannassa on suosittelut ja solmujen väliset liitokset. Asiakkaille suositellaan muita tuotteita joita on ostettu tämän tuotteen kanssa.
 
 <hr>
 
@@ -123,10 +131,3 @@ Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta 
     Lisää indeksit ajamalla docker cp indeksit.js kalastus_db:/tmp/ && docker exec kalastus_db mongosh -u root -p password --authenticationDatabase=admin kalastus_db --file /tmp/indeksit.js
     Käynnistä selain ja avaa Neo4j-browser
     Testaa tietokantaa queries.cypher tiedostosta löytyvillä kyselyillä
-
-
-    Toimeksiantaja mainitsi että lippujen viime hetkellä myyminen on ongelmallista järjestäjän näkökulmasta​
-
-    Early bird –lippu motivoisi kävijöitä ostamaan liput hyvissä ajoin ja palkkioksi he saisivat jotain VIP tyylisiä bonuksia tapahtumaan​
-
-    Käytännössä vaatisi uuden lipputyypin luomisen ja sen implementoimisen lanitapahtuman nettisivulle

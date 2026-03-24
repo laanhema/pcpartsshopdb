@@ -1,4 +1,4 @@
-// tyhjennetään tietokanta
+// tyhjennetään ensin tietokanta jotta päästään aloittamaan ns. puhtaalta pöydältä
 MATCH (n) DETACH DELETE n;
 // ---------------------------------------------------------------------------------
 // create 10 example customers
@@ -70,7 +70,7 @@ CREATE (c5:Customer {
 		email_marketing_preference: true,
 		account_status: "active",
 		account_created_at: datetime("2024-07-05T16:20:00Z"),
-		preferred_language: "sv"
+		preferred_language: "en"
 	}),
 CREATE (c6:Customer {
     id: 6,
@@ -82,7 +82,7 @@ CREATE (c6:Customer {
 		date_of_birth: date("1985-12-01"),
 		phone_number: "+358451010101",
 		email_marketing_preference: false,
-		account_status: "suspended",
+		account_status: "deleted",
 		account_created_at: datetime("2022-12-09T10:00:00Z"),
 		preferred_language: "en"
 	}),
@@ -247,7 +247,7 @@ CREATE (o10:Order {
     id: 10,
 		customer_id: 10,
 		included_products: [2, 4, 8],
-		order_status: "pending",
+		order_status: "being processed",
 		order_date: datetime("2025-03-17T15:55:00Z"),
 		estimated_arrival_date: datetime("2025-03-24T23:59:59Z"),
 		arrival_date: null,
@@ -258,10 +258,10 @@ CREATE (o10:Order {
 // create 10 example products
 CREATE (p1:Product {
   id: 1,
-  name: "Intel Core i5-12600K",
-  image: "https://cdn.myapp.com/uploads/products/product_101.jpg",
-  description: "12th Gen Intel Core i5-12600K desktop processor. Featuring PCIe 5.0 & 4.0 support, DDR5 and DDR4 support, unlocked 12th Gen Intel Core desktop processors are optimized for enthusiast gamers and serious creators and help deliver high performance overclocking for an added boost.",
   product_type: "CPU",
+  name: "Intel Core i5-12600K",
+  image: "https://cdn.myapp.com/uploads/products/product_1.jpg",
+  description: "12th Gen Intel Core i5-12600K desktop processor. Featuring PCIe 5.0 & 4.0 support, DDR5 and DDR4 support, unlocked 12th Gen Intel Core desktop processors are optimized for enthusiast gamers and serious creators and help deliver high performance overclocking for an added boost.",
   price_eur: 289.99,
   tags: ["lga1700", "intel", "cpu", "processor"],
   manufacturer: "Intel",
@@ -273,10 +273,10 @@ CREATE (p1:Product {
 }),
 CREATE (p2:Product {
   id: 2,
-  name: "AMD Ryzen 5 5600X",
-  image: "https://cdn.myapp.com/uploads/products/product_102.jpg",
-  description: "Get the competitive edge in gaming with the world's best desktop processor. AMD Ryzen 5 5600X has 6 cores and 12 threads, and is compatible with AM4 socket motherboards.",
   product_type: "CPU",
+  name: "AMD Ryzen 5 5600X",
+  image: "https://cdn.myapp.com/uploads/products/product_2.jpg",
+  description: "Get the competitive edge in gaming with the world's best desktop processor. AMD Ryzen 5 5600X has 6 cores and 12 threads, and is compatible with AM4 socket motherboards.",
   price_eur: 159.90,
   tags: ["am4", "amd", "cpu", "processor", "ryzen"],
   manufacturer: "AMD",
@@ -288,10 +288,10 @@ CREATE (p2:Product {
 }),
 CREATE (p3:Product {
   id: 3,
-  name: "NVIDIA GeForce RTX 3060",
-  image: "https://cdn.myapp.com/uploads/products/product_201.jpg",
-  description: "The GeForce RTX 3060 lets you take on the latest games using the power of Ampere—NVIDIA's 2nd generation RTX architecture. Get incredible performance with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory.",
   product_type: "GPU",
+  name: "NVIDIA GeForce RTX 3060",
+  image: "https://cdn.myapp.com/uploads/products/product_3.jpg",
+  description: "The GeForce RTX 3060 lets you take on the latest games using the power of Ampere—NVIDIA's 2nd generation RTX architecture. Get incredible performance with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory.",
   price_eur: 349.00,
   tags: ["nvidia", "gpu", "graphics card", "rtx 3060"],
   manufacturer: "NVIDIA",
@@ -303,10 +303,10 @@ CREATE (p3:Product {
 }),
 CREATE (p4:Product {
   id: 4,
-  name: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz",
-  image: "https://cdn.myapp.com/uploads/products/product_301.jpg",
-  description: "Vengeance LPX memory is designed for high-performance overclocking. The heatspreader is made of pure aluminum for faster heat dissipation, and the eight-layer PCB helps manage heat and provides superior overclocking headroom.",
   product_type: "RAM",
+  name: "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz",
+  image: "https://cdn.myapp.com/uploads/products/product_4.jpg",
+  description: "Vengeance LPX memory is designed for high-performance overclocking. The heatspreader is made of pure aluminum for faster heat dissipation, and the eight-layer PCB helps manage heat and provides superior overclocking headroom.",
   price_eur: 49.99,
   tags: ["ram", "memory", "ddr4", "corsair"],
   manufacturer: "Corsair",
@@ -318,10 +318,10 @@ CREATE (p4:Product {
 }),
 CREATE (p5:Product {
   id: 5,
-  name: "ASUS ROG Strix B550-F Gaming",
-  image: "https://cdn.myapp.com/uploads/products/product_205.jpg",
-  description: "ROG Strix B550 Gaming series motherboards offer a feature-set usually found in the higher-end ROG Strix X570 Gaming series, including the latest PCIe 4.0. With robust power delivery and effective cooling, ROG Strix B550 Gaming is well-equipped to handle 3rd Gen AMD Ryzen CPUs.",
   product_type: "Motherboard",
+  name: "ASUS ROG Strix B550-F Gaming",
+  image: "https://cdn.myapp.com/uploads/products/product_5.jpg",
+  description: "ROG Strix B550 Gaming series motherboards offer a feature-set usually found in the higher-end ROG Strix X570 Gaming series, including the latest PCIe 4.0. With robust power delivery and effective cooling, ROG Strix B550 Gaming is well-equipped to handle 3rd Gen AMD Ryzen CPUs.",
   price_eur: 189.90,
   tags: ["motherboard", "asus", "am4", "b550"],
   manufacturer: "ASUS",
@@ -333,10 +333,10 @@ CREATE (p5:Product {
 }),
 CREATE (p6:Product {
   id: 6,
-  name: "Intel Core i9-12900K",
-  image: "https://cdn.myapp.com/uploads/products/product_103.jpg",
-  description: "12th Gen Intel Core i9-12900K desktop processor. Featuring revolutionary hybrid design with Performance-cores and Efficient-cores for breakthrough performance and responsiveness.",
   product_type: "CPU",
+  name: "Intel Core i9-12900K",
+  image: "https://cdn.myapp.com/uploads/products/product_6.jpg",
+  description: "12th Gen Intel Core i9-12900K desktop processor. Featuring revolutionary hybrid design with Performance-cores and Efficient-cores for breakthrough performance and responsiveness.",
   price_eur: 599.00,
   tags: ["lga1700", "intel", "cpu", "processor", "i9"],
   manufacturer: "Intel",
@@ -348,10 +348,10 @@ CREATE (p6:Product {
 }),
 CREATE (p7:Product {
   id: 7,
-  name: "AMD Radeon RX 6700 XT",
-  image: "https://cdn.myapp.com/uploads/products/product_202.jpg",
-  description: "The AMD Radeon RX 6700 XT graphics card, powered by AMD RDNA 2 architecture, featuring 40 powerful enhanced Compute Units, the all new AMD Infinity Cache and 12GB of dedicated GDDR6 memory, is engineered to deliver ultra-high frame rates and powerhouse 1440p resolution gaming.",
   product_type: "GPU",
+  name: "AMD Radeon RX 6700 XT",
+  image: "https://cdn.myapp.com/uploads/products/product_7.jpg",
+  description: "The AMD Radeon RX 6700 XT graphics card, powered by AMD RDNA 2 architecture, featuring 40 powerful enhanced Compute Units, the all new AMD Infinity Cache and 12GB of dedicated GDDR6 memory, is engineered to deliver ultra-high frame rates and powerhouse 1440p resolution gaming.",
   price_eur: 429.00,
   tags: ["amd", "gpu", "graphics card", "rx 6700 xt", "radeon"],
   manufacturer: "AMD",
@@ -363,10 +363,10 @@ CREATE (p7:Product {
 }),
 CREATE (p8:Product {
   id: 8,
-  name: "Samsung 970 EVO Plus 1TB NVMe M.2 SSD",
-  image: "https://cdn.myapp.com/uploads/products/product_401.jpg",
-  description: "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing.",
   product_type: "SSD",
+  name: "Samsung 970 EVO Plus 1TB NVMe M.2 SSD",
+  image: "https://cdn.myapp.com/uploads/products/product_8.jpg",
+  description: "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing.",
   price_eur: 99.99,
   tags: ["ssd", "storage", "nvme", "m.2", "samsung"],
   manufacturer: "Samsung",
@@ -378,10 +378,10 @@ CREATE (p8:Product {
 }),
 CREATE (p9:Product {
   id: 9,
-  name: "Corsair RM850x 850W 80+ Gold",
-  image: "https://cdn.myapp.com/uploads/products/product_501.jpg",
-  description: "Corsair RMx series fully modular power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC. Using only Japanese 105°C capacitors, users can depend on an RMx PSUs' long life and reliability.",
   product_type: "PSU",
+  name: "Corsair RM850x 850W 80+ Gold",
+  image: "https://cdn.myapp.com/uploads/products/product_9.jpg",
+  description: "Corsair RMx series fully modular power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC. Using only Japanese 105°C capacitors, users can depend on an RMx PSUs' long life and reliability.",
   price_eur: 134.90,
   tags: ["psu", "power supply", "corsair", "850w", "gold"],
   manufacturer: "Corsair",
@@ -393,10 +393,10 @@ CREATE (p9:Product {
 }),
 CREATE (p10:Product {
   id: 10,
-  name: "NZXT H510",
-  image: "https://cdn.myapp.com/uploads/products/product_601.jpg",
-  description: "The NZXT H510 is a compact mid-tower ATX case that's easy to build in and offers flexibility for a variety of ATX parts. With a clean, modern design, iconic cable management bar, and tempered glass side panel, your build will look amazing.",
   product_type: "Case",
+  name: "NZXT H510",
+  image: "https://cdn.myapp.com/uploads/products/product_10.jpg",
+  description: "The NZXT H510 is a compact mid-tower ATX case that's easy to build in and offers flexibility for a variety of ATX parts. With a clean, modern design, iconic cable management bar, and tempered glass side panel, your build will look amazing.",
   price_eur: 79.99,
   tags: ["case", "pc case", "atx", "nzxt"],
   manufacturer: "NZXT",
