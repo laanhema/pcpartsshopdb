@@ -118,7 +118,7 @@ Neo4j Project
 
 NoSQL-oppimistehtävä: Pcpartsshop-tietokanta (Neo4j).
 
-Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta käyttäen Neo4j:tä. Pääfokuksena tietokannassa on suosittelut ja solmujen väliset liitokset. Asiakkaille suositellaan muita tuotteita joita on ostettu tämän tuotteen kanssa.
+Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta käyttäen Neo4j:tä. Pääfokuksena tietokannassa on suosittelut ja solmujen väliset liitokset. Esim. asiakkaille suositellaan muita tuotteita joita on ostettu tämän tuotteen kanssa.
 
 <hr>
 
@@ -130,5 +130,5 @@ Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta 
     Lisää käyttäjädata ajamalla docker exec -i kalastus_db mongoimport -u root -p password --authenticationDatabase=admin --drop -d kalastus_db -c kayttajat --jsonArray < kayttajat.json
     Lisää saalisdata ajamalla docker exec -i kalastus_db mongoimport -u root -p password --authenticationDatabase=admin --drop -d kalastus_db -c saaliit --jsonArray < saaliit.json
     Lisää indeksit ajamalla docker cp indeksit.js kalastus_db:/tmp/ && docker exec kalastus_db mongosh -u root -p password --authenticationDatabase=admin kalastus_db --file /tmp/indeksit.js
-    Käynnistä selain ja avaa Neo4j-browser
-    Testaa tietokantaa queries.cypher tiedostosta löytyvillä kyselyillä
+    Käynnistä selain ja avaa Neo4j-browser osoitteessa http://localhost:7474/browser/
+    Testaa tietokantaa erinäisillä kyselyillä
