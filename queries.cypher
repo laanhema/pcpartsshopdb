@@ -81,7 +81,7 @@ MATCH (p:Product)
 ORDER BY p.price_eur ASC
 RETURN p.name AS product_name, p.product_type AS product_type, p.price_eur AS price_eur;
 
-// listaa kaikki budjettiystävälliset komponentit (alle 100 eur hinta)
+// listaa kaikki budjettiystävälliset komponentit (hinta alle 100 eur)
 MATCH (p:Product)
 WHERE p.price_eur <= 100
 ORDER BY p.price_eur ASC
@@ -93,20 +93,18 @@ RETURN p.name AS product_name, p.product_type AS product_type, p.price_eur AS pr
 MATCH (o:Order)
 RETURN ROUND(AVG(o.total_price_eur), 2) AS orders_average_price_eur;
 
-// listaa montako amdn tuotetta tietokannassa on
+// listaa montako amdn tuotetta tietokannassa on yhteensä
 MATCH (p:Product {manufacturer: "AMD"})
 RETURN COUNT(p.id) AS amd_products_in_total;
 
-// JATKA TÄSTÄ ++++++++++++++++++
-
-// etsi henkilöt jotka ovat tilanneet mutta eivät ole kirjoittaneet arvostelua ostamistaan tuotteistaan (KESKEN)
-MATCH (p2:Product)-[:ABOUT]-(r:Review)-[:WROTE]-(c:Customer)-[:ORDERED]-(o:Order)-[:INCLUDED]-(p1:Product)
-WHERE p2 = p1
-RETURN p2, r, c, o, p1;
+// etsi sellaiset komponentit jotka asiakas on sekä arvostellut että tilannut
+MATCH (c:Customer)-[:WROTE]-(r:Review)-[:ABOUT]-(p:Product),
+      (c)-[:ORDERED]-(o:Order)-[:INCLUDED]-(p)
+RETURN c.name AS customer, o.id AS order_id, r.id AS review_id, p.name AS product;
 
 // etsi verkosto kaikista komponenteista jotka ovat yhteensopivia toinen toistensa kanssa
-MATCH (p:Product)-[:IS_COMPATIBLE_WITH]-(p2:Product)
-RETURN p, p2;
+MATCH (p1:Product)-[:IS_COMPATIBLE_WITH]-(p2:Product)
+RETURN p1, p2;
 
 // hyppyjen laskeminen polkumuuttuja
 
