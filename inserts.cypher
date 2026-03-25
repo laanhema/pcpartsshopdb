@@ -555,3 +555,10 @@ DROP CONSTRAINT product_name_unique IF EXISTS;
 DROP CONSTRAINT order_id_unique IF EXISTS;
 DROP CONSTRAINT order_ptn_unique IF EXISTS;
 DROP CONSTRAINT review_id_unique IF EXISTS;
+
+// delete indexes
+DROP INDEX idx_product_type IF EXISTS
+DROP INDEX idx_product_price_eur IF EXISTS
+DROP INDEX idx_product_manufacturer IF EXISTS
+DROP INDEX idx_review_rating_stars IF EXISTS
+DROP INDEX idx_order_total_price_eur IF EXISTS

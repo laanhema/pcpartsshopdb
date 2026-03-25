@@ -99,9 +99,14 @@ RETURN COUNT(p.id) AS amd_products_in_total;
 
 // JATKA TÄSTÄ ++++++++++++++++++
 
-// etsi henkilöt jotka ovat tilanneet mutta eivät ole kirjoittaneet arvostelua ostamistaan tuotteistaan
+// etsi henkilöt jotka ovat tilanneet mutta eivät ole kirjoittaneet arvostelua ostamistaan tuotteistaan (KESKEN)
+MATCH (p2:Product)-[:ABOUT]-(r:Review)-[:WROTE]-(c:Customer)-[:ORDERED]-(o:Order)-[:INCLUDED]-(p1:Product)
+WHERE p2 = p1
+RETURN p2, r, c, o, p1;
 
 // etsi verkosto kaikista komponenteista jotka ovat yhteensopivia toinen toistensa kanssa
+MATCH (p:Product)-[:IS_COMPATIBLE_WITH]-(p2:Product)
+RETURN p, p2;
 
 // hyppyjen laskeminen polkumuuttuja
 
@@ -109,6 +114,24 @@ RETURN COUNT(p.id) AS amd_products_in_total;
 // SHOW INDEXES
 // CREATE INDEX
 
+// luodaan indeksejä
+CREATE INDEX idx_product_type IF NOT EXISTS
+FOR (p:Product) ON (p.product_type);
+CREATE INDEX idx_product_price_eur IF NOT EXISTS
+FOR (p:Product) ON (p.price_eur);
+CREATE INDEX idx_product_manufacturer IF NOT EXISTS
+FOR (p:Product) ON (p.manufacturer);
+CREATE INDEX idx_review_rating_stars IF NOT EXISTS
+FOR (r:Review) ON (r.rating_stars);
+CREATE INDEX idx_order_total_price_eur IF NOT EXISTS
+FOR (o:Order) ON (o.total_price_eur);
 
 
 
+// p.product_type v
+// p.price_eur v
+// p.manufacturer v
+
+// r.rating_stars v
+
+// o.total_price_eur v
