@@ -76,14 +76,28 @@ CREATE (c1)-[:ORDERED]->(o1),
        (o1)-[:INCLUDED]->(p1),
        (o1)-[:INCLUDED]->(p2);
 
+// listaa kaikki komponentit halvimmasta kalleimpaan
+MATCH (p:Product)
+ORDER BY p.price_eur ASC
+RETURN p.name AS product_name, p.product_type AS product_type, p.price_eur AS price_eur;
 
-// listaa kaikki budjettihintaiset komponentit
+// listaa kaikki budjettiystävälliset komponentit (alle 100 eur hinta)
+MATCH (p:Product)
+WHERE p.price_eur <= 100
+ORDER BY p.price_eur ASC
+RETURN p.name AS product_name, p.product_type AS product_type, p.price_eur AS price_eur;
 
 // koostefunktiot tulee vaan returniin ez
 
-// keskimääräinen tilausten hinta
+// kaikkien tilausten keskimääräinen hinta
+MATCH (o:Order)
+RETURN ROUND(AVG(o.total_price_eur), 2) AS orders_average_price_eur;
 
 // listaa montako amdn tuotetta tietokannassa on
+MATCH (p:Product {manufacturer: "AMD"})
+RETURN COUNT(p.id) AS amd_products_in_total;
+
+// JATKA TÄSTÄ ++++++++++++++++++
 
 // etsi henkilöt jotka ovat tilanneet mutta eivät ole kirjoittaneet arvostelua ostamistaan tuotteistaan
 
