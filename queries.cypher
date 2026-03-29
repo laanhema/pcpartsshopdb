@@ -1,3 +1,12 @@
+// Palauttaa kaikki nodet ja relationshipit:
+MATCH (n) RETURN n;
+
+// Näyttää kaikki constraintit:
+SHOW ALL CONSTRAINTS;
+
+// Näyttää kaikki indeksit:
+SHOW INDEXES;
+
 // ----------------------------------------------------------------------------------
 // 1. muutamia peruskyselyjä
 // ----------------------------------------------------------------------------------
