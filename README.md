@@ -4,6 +4,12 @@ NoSQL-oppimistehtävä: PCPartsShop-tietokanta (Neo4j).
 
 Ajatuksena tässä oli tehdä tietokone-komponenttien verkkokaupalle tietokanta käyttäen Neo4j:tä. Pääfokuksena tietokannassa on suosittelut ja solmujen väliset liitokset. Esim. asiakkaille suositellaan muita tuotteita joita on ostettu tämän tuotteen kanssa.
 
+## Tietokannan suhteet
+
+- (:Customer) -[:ORDERED]-> (:Order) -[:INCLUDED]-> (:Product)
+- (:Customer) -[:WROTE]-> (:Review) -[:ABOUT]-> (:Product)
+- (:Product) -[:IS_COMPATIBLE_WITH]-> (:Product)
+
 ## Asennus ja testaus
 
 1. Kloonaa repositorio itsellesi `git clone https://github.com/laanhema/pcpartsshopdb.git`
